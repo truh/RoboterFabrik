@@ -1,5 +1,6 @@
 public interface Teil extends Orderable {
 
-	public int zahlen;
+	/** Zuffalszahlen um dem Montagemitarbeiter Arbeit zu bereiten */
+	public int [] zahlen;
 
 }

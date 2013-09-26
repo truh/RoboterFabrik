@@ -16,4 +16,8 @@ public class Lieferant implements Stoppable {
 
 	}
 
+	public void run()
+	{
+		
+	}
 }

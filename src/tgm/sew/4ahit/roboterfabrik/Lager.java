@@ -49,5 +49,4 @@ public class Lager {
 	public Lager(String filePfad) {
 
 	}
-
 }

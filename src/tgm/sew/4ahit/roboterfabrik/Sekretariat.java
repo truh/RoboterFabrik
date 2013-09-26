@@ -1,6 +1,6 @@
 import java.util.HashSet;
 
-public class Sekretariat implements java.util.Map _int, Mitarbeiter_, Runnable {
+public class Sekretariat implements Runnable {
 
 	private HashSet mitarbeiterSet;
 
@@ -28,4 +28,8 @@ public class Sekretariat implements java.util.Map _int, Mitarbeiter_, Runnable {
 
 	}
 
+	public void run()
+	{
+		
+	}
 }

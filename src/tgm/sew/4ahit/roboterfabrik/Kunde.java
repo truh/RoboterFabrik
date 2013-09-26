@@ -1,13 +1,16 @@
-public class Kunde implements Runnable, Stoppable {
+/**
+ * Kunden geben Bestellungen an den LagerMitarbeiter ab.
+ */
+public class Kunde implements Stoppable {
 
 	private LagerMitarbeiter lagerMitarbeiter;
 
-	private LagerMitarbeiter lagerMitarbeiter;
-
+	/**
+	 * @param lagerMitarbeiter LagerMitarbeiter an den Bestellungen gestellt werden sollen
+	 */
 	public Kunde(LagerMitarbeiter lagerMitarbeiter) {
 
 	}
-
 
 	/**
 	 * @see Stoppable#stop()
@@ -16,4 +19,11 @@ public class Kunde implements Runnable, Stoppable {
 
 	}
 
+	/**
+	 * @see java.lang.Runnable.run()
+	 */
+	public void run()
+	{
+		
+	}
 }
