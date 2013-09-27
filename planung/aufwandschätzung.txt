@@ -1,15 +1,13 @@
 Alle Aufwände inklusive Unit-Tests
 
 +--------------------+-------------+------------+
-| Aufgabe            | Aufwand [h] | Wer        |
+| Aufgabe		     | Aufwand [h] | Wer        |
 +--------------------+-------------+------------+
 | Teil               |             |            |
 | Arm                |             |            |
 | Auge               |             |            |
-| Rumpf              |             |            |
-| Kettenantrieb      |  1          | Andi       |
-+--------------------+-------------+------------+
-| Fabrik             |  3          | Andi       |
+| Rumpf              |             |            | 
+| Kettenantrieb      |  1	       | Andi       |
 +--------------------+-------------+------------+
 | FileStack          |  3          | Jakob      |
 +--------------------+-------------+------------+
@@ -23,9 +21,7 @@ Alle Aufwände inklusive Unit-Tests
 +--------------------+-------------+------------+
 | MontageMitarbeiter |  3          | Andi       |
 +--------------------+-------------+------------+
-| Sekretariat        |  1          | Andi       |
-+--------------------+-------------+------------+
-| Simulation         |  2          | Jakob      |
+| Sekretariat        |  3          | Andi       |
 +--------------------+-------------+------------+
 | SpielzeugRoboter   |  1          | Andi       |
 +--------------------+-------------+------------+
@@ -33,4 +29,4 @@ Alle Aufwände inklusive Unit-Tests
 | Log4J              |             | Andi       |
 | CLI Library        |  3 x 2      | Jakob      |
 +--------------------+-------------+------------+
-  Summe                27
+  Summe				   24

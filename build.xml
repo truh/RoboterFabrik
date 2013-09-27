@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project name="RoboterFabrik" default="jar">
+    <property name="src.dir"    value="./src/" />
+    <property name="build.dir"  value="./build/" />
+    <property name="class.dir"  value="${build.dir}/classes/" />
+    <property name="jar.name"   value="RoboterFabrik_Vogt_Klepp.jar" />
+    <property name="main.class" value="tgm.sew.roboterfabrik.Simulation" />
+
+    <target name="clean" description="remove intermediate files">
+        <delete dir="${build.dir}"/>
+    </target>
+    <target name="compile" description="compile the Java source code to class files">
+        <mkdir dir="${class.dir}"/>
+        <javac srcdir="src" destdir="${class.dir}"/>
+    </target>
+    <target name="test" depends="compile" description="runs the JUnit tests">
+
+    </target>
+    <target name="jar" depends="compile" description="create a Jar file for the application">
+        <jar destfile="RoboterFabrik_Vogt_Klepp.jar">
+            <fileset dir="${class.dir}" includes="**/*.class"/>
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+            </manifest>
+        </jar>
+    </target>
+    <target name="run" depends="jar" description="Executes the Jar file">
+
+    </target>
+</project>
