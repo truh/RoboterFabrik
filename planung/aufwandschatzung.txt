@@ -9,6 +9,8 @@ Alle Aufwände inklusive Unit-Tests
 | Rumpf              |             |            | 
 | Kettenantrieb      |  1	       | Andi       |
 +--------------------+-------------+------------+
+| Fabrik             |  3          | Andi       |
++--------------------+-------------+------------+
 | FileStack          |  3          | Jakob      |
 +--------------------+-------------+------------+
 | Kunde              |  1          | Andi       |
@@ -21,7 +23,9 @@ Alle Aufwände inklusive Unit-Tests
 +--------------------+-------------+------------+
 | MontageMitarbeiter |  3          | Andi       |
 +--------------------+-------------+------------+
-| Sekretariat        |  3          | Andi       |
+| Sekretariat        |  1          | Andi       |
++--------------------+-------------+------------+
+| Simulation         |  2          | Jakob      |
 +--------------------+-------------+------------+
 | SpielzeugRoboter   |  1          | Andi       |
 +--------------------+-------------+------------+
@@ -29,4 +33,4 @@ Alle Aufwände inklusive Unit-Tests
 | Log4J              |             | Andi       |
 | CLI Library        |  3 x 2      | Jakob      |
 +--------------------+-------------+------------+
-  Summe				   24
+  Summe				   27
