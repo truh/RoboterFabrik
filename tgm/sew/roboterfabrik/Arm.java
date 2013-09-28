@@ -8,7 +8,7 @@ public class Arm implements Teil {
 	public int [] zahlen;
 
 	/**
-	 * FÃ¼llt zahlen mit Zufallszahlen
+	 * Füllt zahlen mit Zufallszahlen
 	 */
 	public Arm() {
         this.zahlen = new int[20];

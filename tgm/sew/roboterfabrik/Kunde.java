@@ -10,7 +10,7 @@ public class Kunde implements Stoppable {
 	 * @param lagerMitarbeiter LagerMitarbeiter an den Bestellungen gestellt werden sollen
 	 */
 	public Kunde(LagerMitarbeiter lagerMitarbeiter) {
-
+			this.lagerMitarbeiter = lagerMitarbeiter;
 	}
 
 	/**
