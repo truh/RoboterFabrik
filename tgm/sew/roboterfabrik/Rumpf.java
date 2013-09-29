@@ -4,6 +4,7 @@ package tgm.sew.roboterfabrik;
  */
 public class Rumpf implements Teil {
 
+	public String name;
 	/** @see Teil#zahlen */
 	public int [] zahlen;
 
@@ -11,6 +12,7 @@ public class Rumpf implements Teil {
 	 * Füllt zahlen mit Zufallszahlen
 	 */
 	public Rumpf() {
+		name = "Rumpf";
         this.zahlen = new int[20];
         for(int i = 0;i<20;i++){
             zahlen[i] =(int)(Math.random() * (999 - 1+1)+1);

@@ -4,6 +4,7 @@ package tgm.sew.roboterfabrik;
  */
 public class Kettenantrieb implements Teil {
 
+	public String name;
 	/** @see Teil#zahlen */
 	public int [] zahlen;
 
@@ -11,6 +12,7 @@ public class Kettenantrieb implements Teil {
 	 * Füllt zahlen mit Zufallszahlen
 	 */
 	public Kettenantrieb() {
+		name = "Kettenantrieb";
         this.zahlen = new int[20];
         for(int i = 0;i<20;i++){
             zahlen[i] =(int)(Math.random() * (999 - 1+1)+1);

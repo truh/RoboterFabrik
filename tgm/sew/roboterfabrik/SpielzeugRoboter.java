@@ -1,9 +1,9 @@
 package tgm.sew.roboterfabrik;
 public class SpielzeugRoboter implements Orderable {
 
-	private int id;
+	private String id;
 
-	private int mitarbeiterId;
+	private String mitarbeiterId;
 
 	private Auge auge1;
 
@@ -19,8 +19,15 @@ public class SpielzeugRoboter implements Orderable {
 
 	private Sekretariat sekretariat;
 
-	public SpielzeugRoboter(int id, int mitarbeiterId, Auge auge1, Auge auge2, Rumpf rumpf, Kettenantrieb kettenantrieb, Arm arm1, Arm arm2) {
-
+	public SpielzeugRoboter(String id, String mitarbeiterId, Auge auge1, Auge auge2, Rumpf rumpf, Kettenantrieb kettenantrieb, Arm arm1, Arm arm2) {
+		this.id = id;
+		this.mitarbeiterId = mitarbeiterId;
+		this.auge1 = auge1;
+		this.auge2 = auge2;
+		this.rumpf = rumpf;
+		this.kettenantrieb = kettenantrieb;
+		this.arm1 = arm1;
+		this.arm2 = arm2;
 	}
 
 

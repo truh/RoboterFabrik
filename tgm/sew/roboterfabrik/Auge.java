@@ -6,12 +6,14 @@ package tgm.sew.roboterfabrik;
 public class Auge implements Teil {
 
 	/** @see Teil#zahlen */
+	public String name;
 	public int [] zahlen;
 
 	/**
 	 * Füllt zahlen mit Zufallszahlen
 	 */
 	public Auge() {
+		name = "Auge";
         this.zahlen = new int[20];
         for(int i = 0;i<20;i++){
             zahlen[i] =(int)(Math.random() * (999 - 1+1)+1);
