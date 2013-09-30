@@ -9,11 +9,11 @@ public class LagerMitarbeiter implements Mitarbeiter {
 
 	private int id;
 
-	public Orderable anfrage(Class type) {
+	public Stringifyable anfrage(Class type) {
 		return null;
 	}
 
-	public void einlagern(Orderable item) {
+	public void einlagern(Stringifyable item) {
 
 	}
 

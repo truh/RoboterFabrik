@@ -1,5 +1,5 @@
 package tgm.sew.roboterfabrik;
-public class SpielzeugRoboter implements Orderable {
+public class SpielzeugRoboter implements Stringifyable {
 
 	private String id;
 
@@ -32,10 +32,16 @@ public class SpielzeugRoboter implements Orderable {
 
 
 	/**
-	 * @see Orderable#toCSV()
+	 * @see Stringifyable#toCSV()
 	 */
 	public String toCSV() {
 		return null;
 	}
+
+    @Override
+    public void fromCSV(String csv)
+    {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 
 }

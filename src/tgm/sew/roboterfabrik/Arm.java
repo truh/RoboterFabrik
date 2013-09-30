@@ -7,7 +7,7 @@ public class Arm implements Teil {
 	private int [] zahlen;
 
 	/**
-	 * F�llt zahlen mit Zufallszahlen
+	 * Fuellt zahlen mit Zufallszahlen
 	 */
 	public Arm() {
 		name = "Arm";
@@ -20,6 +20,12 @@ public class Arm implements Teil {
     @Override
     public String toCSV() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void fromCSV(String csv)
+    {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     /**

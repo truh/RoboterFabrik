@@ -10,7 +10,7 @@ import java.util.Queue;
  * Elemente direkt in einer Datei gespeichert sind.
  * Funktioniert nur mit Elementen des Typ Orderable
  */
-public class FileQueue <E extends Orderable> implements Queue<E> {
+public class FileQueue <E extends Stringifyable> implements Queue<E> {
 
 	private String filePfad;
 

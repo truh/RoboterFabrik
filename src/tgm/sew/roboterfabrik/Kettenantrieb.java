@@ -23,6 +23,12 @@ public class Kettenantrieb implements Teil {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    @Override
+    public void fromCSV(String csv)
+    {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     /**
      * Zuffalszahlen um dem Montagemitarbeiter Arbeit zu bereiten
      */

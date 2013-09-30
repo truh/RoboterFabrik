@@ -50,7 +50,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 		while(true){
 			//toDO: Holt sich die Teile vom Lagermitarbeiter
 			for(int i = 0;i<20;i++){
-				for(int ii = 1;ii<21;ii++){
+				for(int ii = 1;ii<21;ii++){      /*todo
 					if(arm1.zahlen[i]>arm1.zahlen[ii]){
 						speicher = arm1.zahlen[i];
 						arm1.zahlen[i]=arm1.zahlen[ii];
@@ -80,7 +80,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 						speicher = rumpf.zahlen[i];
 						rumpf.zahlen[i]=rumpf.zahlen[ii];
 						rumpf.zahlen[ii]=speicher;
-					}
+					}*/
 				}
 			}
 			id = sekretariat.getUniqueID();

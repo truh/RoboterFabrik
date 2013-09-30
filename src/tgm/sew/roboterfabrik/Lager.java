@@ -1,19 +1,20 @@
 package tgm.sew.roboterfabrik;
+import java.util.Queue;
 import java.util.Stack;
 
 public class Lager {
 
 	private String verzeichniss;
 
-	private Stack augen;
+	private Queue<Auge> augen;
 
-	private Stack ruempfe;
+	private Queue<Rumpf> ruempfe;
 
-	private Stack arme;
+	private Queue<Arm> arme;
 
-	private Stack kettenAntriebe;
+	private Queue<Kettenantrieb> kettenAntriebe;
 
-	private FileStack fileStack;
+	private Queue<SpielzeugRoboter> threadees;
 
 	public Auge pushAuge(Auge auge) {
 		return null;

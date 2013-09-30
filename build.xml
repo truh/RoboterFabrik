@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <project name="RoboterFabrik" default="jar">
     <property name="src.dir"    value="./src/" />
+    <property name="test.dir"   value="./test/" />
     <property name="build.dir"  value="./build/" />
     <property name="class.dir"  value="${build.dir}/classes/" />
     <property name="jar.name"   value="RoboterFabrik_Vogt_Klepp.jar" />
+    <property name="jar.temp"   value="${build.dir}/tmp/" />
     <property name="main.class" value="tgm.sew.roboterfabrik.Simulation" />
 
     <target name="clean" description="remove intermediate files">
@@ -17,8 +19,24 @@
 
     </target>
     <target name="jar" depends="compile" description="create a Jar file for the application">
-        <jar destfile="RoboterFabrik_Vogt_Klepp.jar">
-            <fileset dir="${class.dir}" includes="**/*.class"/>
+        <copy todir="${jar.temp}">
+            <fileset dir="${class.dir}" />
+        </copy>
+        <copy todir="${jar.temp}/src">
+            <fileset dir="${src.dir}" />
+        </copy>
+        <copy todir="${jar.temp}/test">
+            <fileset dir="${test.dir}" />
+        </copy>
+        <copy todir="${jar.temp}/planung">
+            <fileset dir="planung/">
+                <exclude name="**/*.bak*" />
+            </fileset>
+        </copy>
+        <copy file="build.xml" todir="${jar.temp}" />
+        <copy file="zeitaufzeichnung_jklepp.rst" todir="${jar.temp}" />
+        <jar destfile="${build.dir}/${jar.name}">
+            <fileset dir="${jar.temp}"/>
             <manifest>
                 <attribute name="Main-Class" value="${main.class}"/>
             </manifest>
