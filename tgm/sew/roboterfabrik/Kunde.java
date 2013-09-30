@@ -27,6 +27,7 @@ public class Kunde implements Stoppable {
 	public void run()
 	{
 		while(true){
+			// Anfrage an den Lagermitarbeiter
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
