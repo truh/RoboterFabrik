@@ -1,3 +1,4 @@
+package tgm.sew.roboterfabrik;
 public class LagerMitarbeiter implements Mitarbeiter {
 
 	private Lager lager;
@@ -31,4 +32,14 @@ public class LagerMitarbeiter implements Mitarbeiter {
 	{
 		
 	}
+
+    @Override
+    public int getId() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Sekretariat getSekretariat() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

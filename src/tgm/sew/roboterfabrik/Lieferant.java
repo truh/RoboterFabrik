@@ -1,6 +1,5 @@
+package tgm.sew.roboterfabrik;
 public class Lieferant implements Stoppable {
-
-	private LagerMitarbeiter lagerMitarbeiter;
 
 	private LagerMitarbeiter lagerMitarbeiter;
 

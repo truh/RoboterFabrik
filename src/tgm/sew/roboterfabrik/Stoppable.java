@@ -1,5 +1,6 @@
+package tgm.sew.roboterfabrik;
 public interface Stoppable extends Runnable {
 
-	public abstract void stop();
+	public void stop();
 
 }

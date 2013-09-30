@@ -1,3 +1,4 @@
+package tgm.sew.roboterfabrik;
 import java.util.Stack;
 
 public class Lager {
