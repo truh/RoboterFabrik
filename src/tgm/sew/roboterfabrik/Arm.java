@@ -3,13 +3,11 @@ package tgm.sew.roboterfabrik;
  * Ein Bauteil des Threadee
  */
 public class Arm implements Teil {
-	
-	/** @see Teil#zahlen */
 	public String name;
-	public int [] zahlen;
+	private int [] zahlen;
 
 	/**
-	 * Füllt zahlen mit Zufallszahlen
+	 * Fï¿½llt zahlen mit Zufallszahlen
 	 */
 	public Arm() {
 		name = "Arm";
@@ -22,5 +20,20 @@ public class Arm implements Teil {
     @Override
     public String toCSV() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    /**
+     * Zuffalszahlen um dem Montagemitarbeiter Arbeit zu bereiten
+     */
+    @Override
+    public int[] getZahlen()
+    {
+        return new int[0];  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public int[] setZahlen()
+    {
+        return new int[0];  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

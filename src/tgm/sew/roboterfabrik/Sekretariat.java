@@ -1,6 +1,6 @@
 package tgm.sew.roboterfabrik;
 import java.util.HashSet;
-// Id für Roboter und Mitarbeiter wird vergeben
+// Id fï¿½r Roboter und Mitarbeiter wird vergeben
 public class Sekretariat implements Runnable {
 	
 	private int id=100;
@@ -27,16 +27,16 @@ public class Sekretariat implements Runnable {
 		
 	}
 	/**
-	 * eine eindeutige ID für den Threadee wird erstellt
-	 * @return eindeutige ID für Threadee
+	 * eine eindeutige ID fuer den Threadee wird erstellt
+	 * @return eindeutige ID fuer Threadee
 	 */
 	public String getUniqueID() {
 		id++;
 		return "Threadee-ID"+id;
 	}
 	/**
-	 * eine eindeutige ID für den Mitarbeiter wird erstellt
-	 * @return eindeutige ID für Mitarbeiter
+	 * eine eindeutige ID fuer den Mitarbeiter wird erstellt
+	 * @return eindeutige ID fuer Mitarbeiter
 	 */
 	public String getUniqueMitarbeiterID() {
 		mitarbeiterId++;

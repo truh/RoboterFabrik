@@ -21,8 +21,8 @@ public class Kunde implements Stoppable {
 	}
 
 	/**
-	 * @see java.lang.Runnable.run()
-	 * Der Kunde schickt anfragen für einen Roboter
+	 * @see java.lang.Runnable#run()
+	 * Der Kunde schickt anfragen fuer einen Roboter
 	 */
 	public void run()
 	{

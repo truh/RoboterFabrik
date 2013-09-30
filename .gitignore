@@ -1,16 +1,11 @@
-<<<<<<< HEAD
-*.bak
-*~
-.idea
-=======
 #temp files
 *.bak
 *~
 
 #IntelliJ Idea
 .idea
+*.iml
 
 #Ant
 classes
 RoboterFabrik_Vogt_Klepp.jar
->>>>>>> 7d1392e99b101e5c428d357afe2d030fdc9c1af4

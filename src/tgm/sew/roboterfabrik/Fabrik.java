@@ -1,14 +1,14 @@
 package tgm.sew.roboterfabrik;
 
-import java.util.concurrent.ThreadPoolExecuter;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Fabrik {
 
-	private ThreadPoolExecuter mitarbeiterPool;
+	private ThreadPoolExecutor mitarbeiterPool;
 
-	private ThreadPoolExecuter kundenPool;
+	private ThreadPoolExecutor kundenPool;
 
-	private ThreadPoolExecuter liferantenPool;
+	private ThreadPoolExecutor liferantenPool;
 
 	private LagerMitarbeiter lagerMitarbeiter;
 

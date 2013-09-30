@@ -5,8 +5,7 @@ package tgm.sew.roboterfabrik;
 public class Rumpf implements Teil {
 
 	public String name;
-	/** @see Teil#zahlen */
-	public int [] zahlen;
+	private int [] zahlen;
 
 	/**
 	 * Füllt zahlen mit Zufallszahlen
@@ -22,5 +21,20 @@ public class Rumpf implements Teil {
     @Override
     public String toCSV() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    /**
+     * Zuffalszahlen um dem Montagemitarbeiter Arbeit zu bereiten
+     */
+    @Override
+    public int[] getZahlen()
+    {
+        return new int[0];  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public int[] setZahlen()
+    {
+        return new int[0];  //To change body of implemented methods use File | Settings | File Templates.
     }
 }
