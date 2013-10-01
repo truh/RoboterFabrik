@@ -19,5 +19,7 @@ public class Fabrik {
 	public Fabrik(int laufzeit, int numLieferanten, int numMonteure, String filePfad) {
 
 	}
+	
+	
 
 }

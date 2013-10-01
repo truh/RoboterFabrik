@@ -7,7 +7,7 @@ public class Arm implements Teil {
 	private int [] zahlen;
 
 	/**
-	 * Fuellt zahlen mit Zufallszahlen
+	 * Fuellt zahlen[] mit Zufallszahlen
 	 */
 	public Arm() {
 		name = "Arm";
