@@ -3,6 +3,7 @@ package tgm.sew.roboterfabrik;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -15,8 +16,10 @@ public class FileQueueTest
     @Test
     public void testConstructor() throws IOException {
         Assert.assertNull("Die Variable sollte noch null sein.", fq);
-        Files.delete(FileSystems.getDefault().getPath("build", "test"));
-        fq = new FileQueue<Arm>("./build/test");
+        if(new File("build/test").exists()){
+            Files.delete(FileSystems.getDefault().getPath("build", "test"));
+        }
+        fq = new FileQueue<Arm>("./build/test", Arm.class);
         Assert.assertNotNull("Sollte nicht mehr null sein", fq);
     }
     @Test

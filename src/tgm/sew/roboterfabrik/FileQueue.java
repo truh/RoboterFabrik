@@ -1,25 +1,89 @@
 package tgm.sew.roboterfabrik;
 
-import java.util.Collection;
-import java.util.EmptyStackException;
-import java.util.Iterator;
-import java.util.Queue;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.io.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.util.*;
 
 /**
  * FileStack implementiert ein Stack wobei die
  * Elemente direkt in einer Datei gespeichert sind.
  * Funktioniert nur mit Elementen des Typ Orderable
+ *
+ * IO lose von http://rosettacode.org/wiki/Remove_lines_from_a_file#Java übernommen
  */
 public class FileQueue <E extends Stringifyable> implements Queue<E> {
 
 	private String filePfad;
+    private Class<E> genericType;
 
 	/**
 	 * @param filePfad Pfad an dem FileStack seine Elemente speichern soll.
 	 */
-	public FileQueue(String filePfad) {
-
+	public FileQueue(String filePfad, Class<E> genericType) throws IOException
+    {
+        //Datei löschen wenn die existiert
+        if(new File("build/test").exists()){
+            Files.delete(FileSystems.getDefault().getPath("build", "test"));
+        }
+        this.filePfad = filePfad;
+        this.genericType = genericType;
 	}
+
+    /**
+     * Liest Textdatei in Queue (LinkedList) und gibt Queue zurück
+     *
+     * @return Liste mit Elementen
+     * @throws IOException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
+    private synchronized Queue<E> readQueue() throws IOException, IllegalAccessException, InstantiationException
+    {   //Queue sollte in diesen Fall ohnehin leer sein.
+        if(genericType == null){
+            return new LinkedList<E>();
+        }
+
+        BufferedReader br;
+        try{
+            br = new BufferedReader(new FileReader(filePfad));
+        }
+        catch (FileNotFoundException fnfe){
+            return new LinkedList<E>();
+        }
+        String line;
+        LinkedList<E> elemente = new LinkedList<E>();
+        while((line=br.readLine())!=null)
+        {
+            E stringi = this.genericType.newInstance();
+            stringi.fromCSV(line);
+            if(null != stringi.toCSV()) {
+                elemente.add(stringi);
+            }
+        }
+
+        br.close(); //Wichtig
+
+        return elemente;
+    }
+
+    /**
+     * Schreibt Queue mit Elementen in Datei
+     *
+     * @param elemente Liste welche in Datei geschrieben werden soll
+     * @throws IOException
+     */
+    private synchronized void writeQueue(Queue<E> elemente) throws IOException
+    {
+        FileWriter fw = new FileWriter(filePfad);
+        for(Iterator<E> it = elemente.iterator(); it.hasNext();){
+            fw.write(it.next().toCSV() + "\n");
+        }
+
+        fw.close();
+    }
 
     /**
      * Returns the number of elements in this collection.  If this collection
@@ -31,7 +95,20 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public int size()
     {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        try
+        {
+            return this.readQueue().size();
+        } catch (IOException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return 0; //TODO, verhalten dokumentieren
     }
 
     /**
@@ -42,7 +119,7 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public boolean isEmpty()
     {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return this.size()==0;
     }
 
     /**
@@ -64,7 +141,28 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public boolean contains(Object o)
     {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        if(!(o instanceof Stringifyable)) {
+            throw new ClassCastException();
+        }
+
+        if(o == null) {
+            throw new NullPointerException();
+        }
+
+        try
+        {
+            return this.readQueue().contains(0);
+        } catch (IOException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return false;
     }
 
     /**
@@ -78,7 +176,20 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public Iterator<E> iterator()
     {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        try
+        {
+            return this.readQueue().iterator();
+        } catch (IOException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return null;
     }
 
     /**
@@ -100,55 +211,29 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public Object[] toArray()
     {
-        return new Object[0];  //To change body of implemented methods use File | Settings | File Templates.
+        try
+        {
+            return this.readQueue().toArray();
+        } catch (IOException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     /**
-     * Returns an array containing all of the elements in this collection;
-     * the runtime type of the returned array is that of the specified array.
-     * If the collection fits in the specified array, it is returned therein.
-     * Otherwise, a new array is allocated with the runtime type of the
-     * specified array and the size of this collection.
-     * <p/>
-     * <p>If this collection fits in the specified array with room to spare
-     * (i.e., the array has more elements than this collection), the element
-     * in the array immediately following the end of the collection is set to
-     * <tt>null</tt>.  (This is useful in determining the length of this
-     * collection <i>only</i> if the caller knows that this collection does
-     * not contain any <tt>null</tt> elements.)
-     * <p/>
-     * <p>If this collection makes any guarantees as to what order its elements
-     * are returned by its iterator, this method must return the elements in
-     * the same order.
-     * <p/>
-     * <p>Like the {@link #toArray()} method, this method acts as bridge between
-     * array-based and collection-based APIs.  Further, this method allows
-     * precise control over the runtime type of the output array, and may,
-     * under certain circumstances, be used to save allocation costs.
-     * <p/>
-     * <p>Suppose <tt>x</tt> is a collection known to contain only strings.
-     * The following code can be used to dump the collection into a newly
-     * allocated array of <tt>String</tt>:
-     * <p/>
-     * <pre>
-     *     String[] y = x.toArray(new String[0]);</pre>
-     *
-     * Note that <tt>toArray(new Object[0])</tt> is identical in function to
-     * <tt>toArray()</tt>.
-     *
-     * @param a the array into which the elements of this collection are to be
-     *          stored, if it is big enough; otherwise, a new array of the same
-     *          runtime type is allocated for this purpose.
-     * @return an array containing all of the elements in this collection
-     * @throws ArrayStoreException  if the runtime type of the specified array
-     *                              is not a supertype of the runtime type of every element in
-     *                              this collection
-     * @throws NullPointerException if the specified array is null
+     * Not Implemented
      */
     @Override
     public <T> T[] toArray(T[] a)
     {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        throw new NotImplementedException();
     }
 
     /**
@@ -171,7 +256,32 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public boolean add(E e)
     {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        Queue<E> queue = null;
+        try
+        {
+            queue = this.readQueue();
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        boolean b = queue.add(e);
+
+        try
+        {
+            this.writeQueue(queue);
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            return false;
+        }
+        return b;
     }
 
     /**
@@ -197,7 +307,32 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public boolean remove(Object o)
     {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        Queue<E> queue = null;
+        try
+        {
+            queue = this.readQueue();
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        boolean b = queue.remove(o);
+
+        try
+        {
+            this.writeQueue(queue);
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            return false;
+        }
+        return b;
     }
 
     /**
@@ -221,7 +356,20 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public boolean containsAll(Collection<?> c)
     {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        try
+        {
+            return this.readQueue().containsAll(c);
+        } catch (IOException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return false;//Todo nochmal drüber nachdenken
     }
 
     /**
@@ -251,7 +399,32 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public boolean addAll(Collection<? extends E> c)
     {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        Queue<E> queue = null;
+        try
+        {
+            queue = this.readQueue();
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        boolean b = queue.addAll(c);
+
+        try
+        {
+            this.writeQueue(queue);
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            return false;
+        }
+        return b;
     }
 
     /**
@@ -280,7 +453,32 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public boolean removeAll(Collection<?> c)
     {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        Queue<E> queue = null;
+        try
+        {
+            queue = this.readQueue();
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        boolean b = queue.removeAll(c);
+
+        try
+        {
+            this.writeQueue(queue);
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            return false;
+        }
+        return b;
     }
 
     /**
@@ -308,7 +506,32 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public boolean retainAll(Collection<?> c)
     {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        Queue<E> queue = null;
+        try
+        {
+            queue = this.readQueue();
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        boolean b = queue.retainAll(c);
+
+        try
+        {
+            this.writeQueue(queue);
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            return false;
+        }
+        return b;
     }
 
     /**
@@ -321,7 +544,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public void clear()
     {
-        //To change body of implemented methods use File | Settings | File Templates.
+        try
+        {
+            this.writeQueue(new LinkedList<E>());
+        } catch (IOException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
     }
 
     /**
@@ -344,7 +573,32 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public boolean offer(E e)
     {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        Queue<E> queue = null;
+        try
+        {
+            queue = this.readQueue();
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        boolean b = queue.offer(e);
+
+        try
+        {
+            this.writeQueue(queue);
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            return false;
+        }
+        return b;
     }
 
     /**
@@ -359,7 +613,32 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public E remove()
     {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Queue<E> queue = null;
+        try
+        {
+            queue = this.readQueue();
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        E element = queue.remove();
+
+        try
+        {
+            this.writeQueue(queue);
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            //return element;
+        }
+        return element;
     }
 
     /**
@@ -371,7 +650,32 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public E poll()
     {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Queue<E> queue = null;
+        try
+        {
+            queue = this.readQueue();
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        E element = queue.poll();
+
+        try
+        {
+            this.writeQueue(queue);
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            //return element;
+        }
+        return element;
     }
 
     /**
@@ -386,7 +690,32 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public E element()
     {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Queue<E> queue = null;
+        try
+        {
+            queue = this.readQueue();
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        E element = queue.element();
+
+        try
+        {
+            this.writeQueue(queue);
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            //return element;
+        }
+        return element;
     }
 
     /**
@@ -398,6 +727,31 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     @Override
     public E peek()
     {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Queue<E> queue = null;
+        try
+        {
+            queue = this.readQueue();
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        E element = queue.peek();
+
+        try
+        {
+            this.writeQueue(queue);
+        } catch (IOException e1)
+        {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            //return element;
+        }
+        return element;
     }
 }
