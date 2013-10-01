@@ -49,6 +49,9 @@ public class MontageMitarbeiter implements Mitarbeiter {
 	public void run(){
 		while(true){
 			//toDO: Holt sich die Teile vom Lagermitarbeiter
+			if((auge1 == null)||(auge2 == null)||(arm1 == null)||(arm2==null)||(rumpf==null)||(kettenantrieb==null)){
+				
+			}else{
 			for(int i = 0;i<20;i++){
 				for(int ii = 1;ii<21;ii++){      /*todo
 					if(arm1.zahlen[i]>arm1.zahlen[ii]){
@@ -87,6 +90,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 			mitarbeiterId = sekretariat.getUniqueMitarbeiterID();
 			spielzeugRoboter = new SpielzeugRoboter(id, mitarbeiterId ,auge1, auge2,rumpf,kettenantrieb,arm1, arm2);
 			// Hier kommt ne Methode rein wo der Lagermitarbeiter den Spielzeugroboter in das Lager gibt
+			}
         }
 	}
 
