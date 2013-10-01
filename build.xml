@@ -11,6 +11,8 @@
     <property name="cgi.ver"    value="1.2" />
     <property name="cgi.zip"    value="commons-cli-${cgi.ver}-bin.zip" />
     <property name="cgi.url"    value="http://tweedo.com/mirror/apache//commons/cli/binaries/${cgi.zip}" />
+    <property name="junit.ver"  value="4.11" />
+    <property name="junit.url"  value="http://repo1.maven.org/maven2/junit/junit/${junit.ver}/junit-${junit.ver}.jar" />
     <property name="jar.name"   value="RoboterFabrik_Vogt_Klepp.jar" />
     <property name="jar.temp"   value="${build.dir}/tmp/" />
     <property name="main.class" value="tgm.sew.roboterfabrik.Simulation" />
@@ -58,16 +60,26 @@
         <javac srcdir="${build.dir}/src" destdir="${class.dir}"/>
     </target>
 
-    <target name="test" depends="compile" description="runs the JUnit tests">
+    <available property="junit.setup" file="lib/junit-${junit.ver}.jar" />
 
+    <target name="setup-junit" unless="junit.setup">
+        <get src="${junit.url}" dest="lib/" />
+    </target>
+
+    <target name="test" depends="compile,setup-junit" description="runs the JUnit tests">
+        <!-- todo implement this 
+        <junit dir="test">
+            <classpath
+        </junit>  -->
     </target>
 
     <target name="jar" depends="compile" description="create a Jar file for the application">
-        <!-- jar in jar -->
-        <mkdir dir="${jar.temp}/lib" />
-        <copy file="lib/log4j-api-${log4j.ver}.jar" todir="${jar.temp}/lib" />
-        <copy file="lib/log4j-core-${log4j.ver}.jar" todir="${jar.temp}/lib" />
-        <copy file="lib/commons-cli-${cgi.ver}.jar" todir="${jar.temp}/lib" />
+        <!-- extract lib contents to jar -->
+        <copy todir="${jar.temp}">
+            <zipfileset src="lib/log4j-api-${log4j.ver}.jar" excludes="**/META-INF/*" />
+            <zipfileset src="lib/log4j-core-${log4j.ver}.jar" excludes="**/META-INF/*" />
+            <zipfileset src="lib/commons-cli-${cgi.ver}.jar" excludes="**/META-INF/*" />
+        </copy>
         <copy todir="${jar.temp}">
             <fileset dir="${class.dir}" />
         </copy>
@@ -93,6 +105,6 @@
     </target>
 
     <target name="run" depends="jar" description="Executes the Jar file">
-
+        <java jar="build/RoboterFabrik_Vogt_Klepp.jar" args="" />
     </target>
 </project>
