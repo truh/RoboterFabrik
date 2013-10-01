@@ -5,9 +5,6 @@
     <property name="build.dir"  value="./build/" />
     <property name="class.dir"  value="${build.dir}/classes/" />
     <property name="dl.dir"     value="${build.dir}/dl/" />
-    <property name="log4j.ver"  value="2.0-beta9" />
-    <property name="log4j.zip"  value="apache-log4j-${log4j.ver}-bin.zip" />
-    <property name="log4j.url"  value="http://tweedo.com/mirror/apache/logging/log4j/${log4j.ver}/${log4j.zip}" />
     <property name="cgi.ver"    value="1.2" />
     <property name="cgi.zip"    value="commons-cli-${cgi.ver}-bin.zip" />
     <property name="cgi.url"    value="http://tweedo.com/mirror/apache//commons/cli/binaries/${cgi.zip}" />
@@ -16,24 +13,6 @@
     <property name="jar.name"   value="RoboterFabrik_Vogt_Klepp.jar" />
     <property name="jar.temp"   value="${build.dir}/tmp/" />
     <property name="main.class" value="tgm.sew.roboterfabrik.Simulation" />
-
-    <!-- log4j2 -->
-    <available property="log4j.downloaded" file="${dl.dir}/${log4j.zip}" />
-    <target name="download-log4j" unless="log4j.downloaded">
-        <mkdir dir="${dl.dir}" />
-        <get src="${log4j.url}" dest="${dl.dir}" />
-    </target>
-    <condition property="log4j.setup">
-        <and>
-            <available file="lib/log4j-api-${log4j.ver}.jar" />
-            <available file="lib/log4j-core-${log4j.ver}.jar" />
-        </and>
-    </condition>
-    <target name="setup-log4j" depends="download-log4j" unless="log4j.setup">
-        <unzip src="${dl.dir}/${log4j.zip}" dest="${dl.dir}" />
-        <copy file="${dl.dir}/apache-log4j-${log4j.ver}-bin/log4j-api-${log4j.ver}.jar" todir="lib" />
-        <copy file="${dl.dir}/apache-log4j-${log4j.ver}-bin/log4j-core-${log4j.ver}.jar" todir="lib" />
-    </target>
 
     <!-- commons-cli2 -->
     <available property="cgi.downloaded" file="${dl.dir}/${cgi.zip}" />
@@ -52,32 +31,25 @@
         <delete dir="out"/>
     </target>
 
-    <target name="compile" description="compile the Java source code to class files" depends="setup-log4j,setup-cgi">
-        <mkdir dir="${class.dir}"/>
-        <copy todir="${build.dir}/src">
-            <fileset dir="src" />
-        </copy>
-        <javac srcdir="${build.dir}/src" destdir="${class.dir}"/>
-    </target>
-
     <available property="junit.setup" file="lib/junit-${junit.ver}.jar" />
 
     <target name="setup-junit" unless="junit.setup">
         <get src="${junit.url}" dest="lib/" />
     </target>
 
-    <target name="test" depends="compile,setup-junit" description="runs the JUnit tests">
-        <!-- todo implement this 
-        <junit dir="test">
-            <classpath
-        </junit>  -->
+    <target name="compile" description="compile the Java source code to class files" depends="setup-cgi,setup-junit">
+        <mkdir dir="${class.dir}"/>
+        <copy todir="${build.dir}/src">
+            <fileset dir="src" />
+        </copy>
+        <javac srcdir="${build.dir}/src" destdir="${class.dir}">
+            <classpath path="lib/commons-cli-${cgi.ver}.jar" />
+        </javac>
     </target>
 
     <target name="jar" depends="compile" description="create a Jar file for the application">
         <!-- extract lib contents to jar -->
         <copy todir="${jar.temp}">
-            <zipfileset src="lib/log4j-api-${log4j.ver}.jar" excludes="**/META-INF/*" />
-            <zipfileset src="lib/log4j-core-${log4j.ver}.jar" excludes="**/META-INF/*" />
             <zipfileset src="lib/commons-cli-${cgi.ver}.jar" excludes="**/META-INF/*" />
         </copy>
         <copy todir="${jar.temp}">
