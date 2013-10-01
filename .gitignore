@@ -1,6 +1,7 @@
 lib
 out
 src/Start.java
+bin
 
 #temp files
 *.bak
@@ -9,6 +10,8 @@ src/Start.java
 #IntelliJ Idea
 .idea
 *.iml
+
+#eclipse
 
 #Ant
 classes
