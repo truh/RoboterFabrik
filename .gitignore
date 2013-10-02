@@ -12,6 +12,8 @@ bin
 *.iml
 
 #eclipse
+.classpath
+.project
 
 #Ant
 classes
