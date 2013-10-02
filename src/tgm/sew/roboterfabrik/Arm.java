@@ -34,12 +34,17 @@ public class Arm implements Teil {
     @Override
     public int[] getZahlen()
     {
-        return new int[0];  //To change body of implemented methods use File | Settings | File Templates.
+        return zahlen;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
-    public int[] setZahlen()
-    {
-        return new int[0];  //To change body of implemented methods use File | Settings | File Templates.
-    }
+    /**
+     * 
+     */
+	@Override
+	public void setZahlen(int[] zahlen) {
+		for(int i = 0;i<20;i++){
+			this.zahlen[i] = zahlen[i];
+		}
+		
+	}
 }

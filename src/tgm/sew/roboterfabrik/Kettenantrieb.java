@@ -35,12 +35,14 @@ public class Kettenantrieb implements Teil {
     @Override
     public int[] getZahlen()
     {
-        return new int[0];  //To change body of implemented methods use File | Settings | File Templates.
+        return zahlen;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public int[] setZahlen()
+    public void setZahlen(int[]zahlen)
     {
-        return new int[0];  //To change body of implemented methods use File | Settings | File Templates.
+    	for(int i = 0;i<20;i++){
+			this.zahlen[i] = zahlen[i];
+    	}
     }
 }

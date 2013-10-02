@@ -4,7 +4,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 public class Fabrik {
 
-	private ThreadPoolExecutor mitarbeiterPool;
+	private ThreadPoolExecutor montageMitarbeiterPool;
+	
+	private ThreadPoolExecutor lagerMitarbeiterPool;
 
 	private ThreadPoolExecutor kundenPool;
 
@@ -17,7 +19,8 @@ public class Fabrik {
 	private Lager lager;
 
 	public Fabrik(int laufzeit, int numLieferanten, int numMonteure, String filePfad) {
-
+		
+			
 	}
 	
 	

@@ -9,7 +9,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
 
 	private int id;
 
-	public Stringifyable anfrage(Class type) {
+	public Stringifyable anfrage(Class<? extends Stringifyable> type) {
 		return null;
 	}
 
