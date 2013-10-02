@@ -32,7 +32,10 @@ public class Kettenantrieb implements Teil {
 
     @Override
     public void fromCSV(String csv){
-        
+    	String[] items = csv.replaceAll("Kettenantrieb,","").split(",");// löscht das Wort raus und trennt mit den "," die Zahlen im String
+    	for(int i = 0 ;i<zahlen.length;i++){
+    		zahlen[i]=Integer.parseInt(items[i]);
+    	}
     }
 
     /**

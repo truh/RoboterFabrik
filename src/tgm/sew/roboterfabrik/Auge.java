@@ -33,7 +33,10 @@ public class Auge implements Teil {
     @Override
     public void fromCSV(String csv)
     {
-        //To change body of implemented methods use File | Settings | File Templates.
+    	String[] items = csv.replaceAll("Auge,","").split(",");// löscht das Wort raus und trennt mit den "," die Zahlen im String
+    	for(int i = 0 ;i<zahlen.length;i++){
+    		zahlen[i]=Integer.parseInt(items[i]);
+    	}
     }
 
     /**
