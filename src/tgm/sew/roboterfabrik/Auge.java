@@ -20,7 +20,14 @@ public class Auge implements Teil {
 
     @Override
     public String toCSV() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    	StringBuilder s = new StringBuilder(44);//Min anzahl der Zeichen im Stringbuilder(auge = 4 Zeiche zahlen = 20 beistriche = 20
+    	s.append("Auge");
+    	for(int i = 0;i<20;i++){
+    		s.append(",");
+    		s.append(zahlen[i]);
+    	}
+    	
+        return s.toString();
     }
 
     @Override

@@ -20,7 +20,14 @@ public class Rumpf implements Teil {
 
     @Override
     public String toCSV() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    	StringBuilder s = new StringBuilder(45);//Min anzahl der Zeichen im Stringbuilder(Rumpf = 5 Zeiche zahlen = 20 beistriche = 20
+    	s.append("Rumpf");
+    	for(int i = 0;i<20;i++){
+    		s.append(",");
+    		s.append(zahlen[i]);
+    	}
+    	
+        return s.toString();
     }
 
     @Override

@@ -1,27 +1,11 @@
 package tgm.sew.roboterfabrik;
 import java.util.HashSet;
 // Id f�r Roboter und Mitarbeiter wird vergeben
-public class Sekretariat implements Runnable {
+public class Sekretariat {
 	
 	private int id=100;
 	
 	private int mitarbeiterId=100;
-	
-	private HashSet mitarbeiterSet;
-
-	private HashSet kundenSet;
-
-	private HashSet liferantenSet;
-
-	private LagerMitarbeiter lagerMitarbeiter;
-
-	private SpielzeugRoboter spielzeugRoboter;
-
-	private Lieferant lieferant;
-
-	private Kunde kunde;
-
-	private Mitarbeiter mitarbeiter;
 	
 	public Sekretariat(){
 		
@@ -30,24 +14,20 @@ public class Sekretariat implements Runnable {
 	 * eine eindeutige ID fuer den Threadee wird erstellt
 	 * @return eindeutige ID fuer Threadee
 	 */
-	public String getUniqueID() {
+	public int getUniqueID() {
 		id++;
-		return "Threadee-ID"+id;
+		return id;
 	}
 	/**
 	 * eine eindeutige ID fuer den Mitarbeiter wird erstellt
 	 * @return eindeutige ID fuer Mitarbeiter
 	 */
-	public String getUniqueMitarbeiterID() {
+	public int getUniqueMitarbeiterID() {
 		mitarbeiterId++;
-		return "Mitarbeiter-ID"+mitarbeiterId;
+		return mitarbeiterId;
 	}
 	public Sekretariat(int laufzeit, int numLieferanten, int numMonteure, String filePfad) {
 
 	}
 
-	public void run()
-	{
-		
-	}
 }

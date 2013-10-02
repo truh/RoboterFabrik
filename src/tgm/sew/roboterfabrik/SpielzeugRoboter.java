@@ -1,9 +1,10 @@
 package tgm.sew.roboterfabrik;
 public class SpielzeugRoboter implements Stringifyable {
+	private static String TID_PREFIX= "Threadee-ID";
 
-	private String id;
+	private int id;
 
-	private String mitarbeiterId;
+	private int mitarbeiterId;
 
 	private Auge auge1;
 
@@ -19,7 +20,7 @@ public class SpielzeugRoboter implements Stringifyable {
 
 	private Sekretariat sekretariat;
 
-	public SpielzeugRoboter(String id, String mitarbeiterId, Auge auge1, Auge auge2, Rumpf rumpf, Kettenantrieb kettenantrieb, Arm arm1, Arm arm2) {
+	public SpielzeugRoboter(int id, int mitarbeiterId, Auge auge1, Auge auge2, Rumpf rumpf, Kettenantrieb kettenantrieb, Arm arm1, Arm arm2) {
 		this.id = id;
 		this.mitarbeiterId = mitarbeiterId;
 		this.auge1 = auge1;

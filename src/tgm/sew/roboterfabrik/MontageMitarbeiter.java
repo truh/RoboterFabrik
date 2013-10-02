@@ -1,6 +1,6 @@
 package tgm.sew.roboterfabrik;
 public class MontageMitarbeiter implements Mitarbeiter {
-	private String id;
+	private int id;
 
 	private Auge auge1;
 	private Auge auge2;
@@ -16,7 +16,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 
 	private LagerMitarbeiter lagerMitarbeiter;
 	
-	private String mitarbeiterId;
+	private int mitarbeiterId;
 	
 	private int speicher;
 	
@@ -28,7 +28,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 	 * @param sekretariat
 	 * @param lagerMitarbeiter
 	 */
-	public MontageMitarbeiter(String id, Sekretariat sekretariat, LagerMitarbeiter lagerMitarbeiter) {
+	public MontageMitarbeiter(int id, Sekretariat sekretariat, LagerMitarbeiter lagerMitarbeiter) {
 		this.id = id;
 		this.sekretariat=sekretariat;
 		this.lagerMitarbeiter=lagerMitarbeiter;
@@ -40,7 +40,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 	 * @see Stoppable#stop()
 	 */
 	public void stop() {
-
+		
 	}
 	/**
 	 * Hier werden die zahlen in den Einzelnen Teilen sortiert und danach der Roboter erstellt und vom lagermitarbeiter ins Lager
@@ -66,51 +66,34 @@ public class MontageMitarbeiter implements Mitarbeiter {
 			rumpfzahlen = rumpf.getZahlen();
 			int[] kettenantriebzahlen = new int[20];
 			kettenantriebzahlen = kettenantrieb.getZahlen();
-			//toDO: Holt sich die Teile vom Lagermitarbeiter
 			if((auge1zahlen == null)||(auge2zahlen == null)||(arm1zahlen == null)||(arm2zahlen==null)||(rumpfzahlen==null)||(kettenantriebzahlen==null)){
-				
+				lagerMitarbeiter.einlagern(arm1);
+				lagerMitarbeiter.einlagern(arm2);
+				lagerMitarbeiter.einlagern(auge1);
+				lagerMitarbeiter.einlagern(auge2);
+				lagerMitarbeiter.einlagern(rumpf);
+				lagerMitarbeiter.einlagern(kettenantrieb);
 			}else{
-			for(int i = 0;i<20;i++){
-				for(int ii = 1;ii<21;ii++){      
-					if(arm1zahlen[i]>arm1zahlen[ii]){
-						speicher = arm1zahlen[i];
-						arm1zahlen[i]=arm1zahlen[ii];
-						arm1zahlen[ii]=speicher;
-					}
-					if(arm2zahlen[i]>arm2zahlen[ii]){
-						speicher = arm2zahlen[i];
-						arm2zahlen[i]=arm2zahlen[ii];
-						arm2zahlen[ii]=speicher;
-					}
-					if(auge1zahlen[i]>auge1zahlen[ii]){
-						speicher = auge1zahlen[i];
-						auge1zahlen[i]=auge1zahlen[ii];
-						auge1zahlen[ii]=speicher;
-					}
-					if(auge2zahlen[i]>auge2zahlen[ii]){
-						speicher = auge2zahlen[i];
-						auge2zahlen[i]=auge2zahlen[ii];
-						auge2zahlen[ii]=speicher;
-					}
-					if(kettenantriebzahlen[i]>kettenantriebzahlen[ii]){
-						speicher = kettenantriebzahlen[i];
-						kettenantriebzahlen[i]=kettenantriebzahlen[ii];
-						kettenantriebzahlen[ii]=speicher;
-					}
-					if(rumpfzahlen[i]>rumpfzahlen[ii]){
-						speicher = rumpfzahlen[i];
-						rumpfzahlen[i]=rumpfzahlen[ii];
-						rumpfzahlen[ii]=speicher;
-					}
-				}
+				auge1zahlen=sortieren(auge1zahlen);
+				auge2zahlen=sortieren(auge2zahlen);
+				arm1zahlen=sortieren(arm1zahlen);
+				arm2zahlen=sortieren(arm2zahlen);
+				rumpfzahlen=sortieren(rumpfzahlen);
+				kettenantriebzahlen=sortieren(kettenantriebzahlen);
+				auge1.setZahlen(auge1zahlen);
+				auge2.setZahlen(auge2zahlen);
+				arm1.setZahlen(arm1zahlen);
+				arm2.setZahlen(arm2zahlen);
+				rumpf.setZahlen(rumpfzahlen);
+				kettenantrieb.setZahlen(kettenantriebzahlen);
+				
 			}
 			id = sekretariat.getUniqueID();
 			mitarbeiterId = sekretariat.getUniqueMitarbeiterID();
 			spielzeugRoboter = new SpielzeugRoboter(id, mitarbeiterId ,auge1, auge2,rumpf,kettenantrieb,arm1, arm2);
-			// Hier kommt ne Methode rein wo der Lagermitarbeiter den Spielzeugroboter in das Lager gibt
+			lagerMitarbeiter.einlagern(spielzeugRoboter);
 			}
         }
-	}
 
     @Override
     public int getId() {

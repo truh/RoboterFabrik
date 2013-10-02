@@ -19,13 +19,20 @@ public class Arm implements Teil {
 
     @Override
     public String toCSV() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    	StringBuilder s = new StringBuilder(43);//Min anzahl der Zeichen im Stringbuilder(arm = 3 Zeiche zahlen = 20 beistriche = 20
+    	s.append("Arm");
+    	for(int i = 0;i<20;i++){
+    		s.append(",");
+    		s.append(zahlen[i]);
+    	}
+    	
+        return s.toString();
     }
 
     @Override
     public void fromCSV(String csv)
     {
-        //To change body of implemented methods use File | Settings | File Templates.
+        
     }
 
     /**
