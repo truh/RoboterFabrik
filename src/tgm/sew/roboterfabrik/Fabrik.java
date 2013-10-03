@@ -19,7 +19,7 @@ public class Fabrik {
 	private Lager lager;
 
 	public Fabrik(int laufzeit, int numLieferanten, int numMonteure, String filePfad) {
-		montageMitarbeiterPool = new ThreadPoolExecutor(1,numMonteure,laufzeit,filePfad);
+		montageMitarbeiterPool = new ThreadPoolExecutor(1,numMonteure,laufzeit,null);
 			
 	}
 	
