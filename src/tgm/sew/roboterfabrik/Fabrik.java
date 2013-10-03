@@ -18,27 +18,34 @@ public class Fabrik {
 
 	private ThreadPoolExecutor liferantenPool;
 
-	private LagerMitarbeiter lagerMitarbeiter;
-
 	private Sekretariat sekretariat;
 
 	private Lager lager;
 	
 	
 	public Fabrik(int laufzeit, int numLieferanten, int numMonteure, String filePfad) {
-		
+        this.sekretariat = new Sekretariat();
+
+        //LagerMitarbeiter erzeugen
+        LagerMitarbeiter lagerMitarbeiter = new LagerMitarbeiter(sekretariat.getUniqueID(), filePfad);
+        lagerMitarbeiterPool = new ThreadPoolExecutor(1,1, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(1));
+        lagerMitarbeiterPool.execute(lagerMitarbeiter);
+
+        //MontageMitarbeiter erzeugen
 		montageMitarbeiterPool = new ThreadPoolExecutor(numMonteure, numMonteure, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(numMonteure));
+        for(int i=0; i<numMonteure; i++){
+            montageMitarbeiterPool.execute(new MontageMitarbeiter(sekretariat.getUniqueMitarbeiterID(),sekretariat,lagerMitarbeiter));
+        }
+
+        //Lieferanten erzeugen
 		liferantenPool = new ThreadPoolExecutor( numLieferanten, numLieferanten, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(numLieferanten));
+        for(int i=0; i<numLieferanten; i++){
+            liferantenPool.execute(new Lieferant(lagerMitarbeiter));
+        }
+
+        //Kunden erzeugen
 		kundenPool = new ThreadPoolExecutor(1, 1, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(1));
-		lagerMitarbeiterPool = new ThreadPoolExecutor(1,1, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(1));
-		for(int i=0; i<numMonteure; i++){
-			montageMitarbeiterPool.execute(new MontageMitarbeiter(sekretariat.getUniqueMitarbeiterID(),sekretariat,lagerMitarbeiter));
-        }
-		for(int i=0; i<numLieferanten; i++){
-			liferantenPool.execute(new Lieferant(lagerMitarbeiter));
-        }
-		kundenPool.execute(new Kunde(lagerMitarbeiter));
-		lagerMitarbeiterPool.execute(new LagerMitarbeiter(sekretariat.getUniqueID(), filePfad));
+        kundenPool.execute(new Kunde(lagerMitarbeiter));
     }
 }
 	

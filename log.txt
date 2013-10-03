@@ -1,6 +1,0 @@
-[INFO|/] RoboterFabrik gestartet mit Argumenten
-[INFO|/] lager:	null
-[INFO|/] logs:	null
-[INFO|/] lieferanten:	null
-[INFO|/] monteure:	null
-[INFO|/] laufzeit:	null
