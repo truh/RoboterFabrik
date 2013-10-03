@@ -13,7 +13,7 @@ public class Simulation {
 	public static void main(String [] args) {
         try
         {
-            loggerFactory = new LoggerFactory("log.txt"); //todo CLI eingabe als Pfad wählen
+            loggerFactory = new LoggerFactory("log.txt"); //todo CLI eingabe als Pfad waehlen
         } catch (IOException e)
         {
             e.printStackTrace();
