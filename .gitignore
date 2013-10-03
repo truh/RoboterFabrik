@@ -6,6 +6,7 @@ bin
 #temp files
 *.bak
 *~
+*.~lock*
 
 #IntelliJ Idea
 .idea
