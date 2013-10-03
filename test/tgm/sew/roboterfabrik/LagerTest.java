@@ -1,125 +1,116 @@
 package tgm.sew.roboterfabrik;
 
-import org.junit.Test; 
-import org.junit.Before; 
-import org.junit.After; 
+import org.junit.Test;
+import org.junit.Before;
+import org.junit.After;
 
-/** 
-* Lager Tester. 
-* 
-* @author <Authors name> 
-* @since <pre>Oct 3, 2013</pre> 
-* @version 1.0 
-*/ 
-public class LagerTest { 
+public class LagerTest {
 
-@Before
-public void before() throws Exception { 
-} 
+    @Before
+    public void before() throws Exception {
+    }
 
-@After
-public void after() throws Exception { 
-} 
+    @After
+    public void after() throws Exception {
+    }
 
-/** 
-* 
-* Method: addAuge(Auge auge) 
-* 
-*/ 
-@Test
-public void testAddAuge() throws Exception { 
+    /**
+     *
+     * Method: addAuge(Auge auge)
+     *
+     */
+    @Test
+    public void testAddAuge() throws Exception {
 //TODO: Test goes here... 
-} 
+    }
 
-/** 
-* 
-* Method: addRumpf(Rumpf rumpf) 
-* 
-*/ 
-@Test
-public void testAddRumpf() throws Exception { 
+    /**
+     *
+     * Method: addRumpf(Rumpf rumpf)
+     *
+     */
+    @Test
+    public void testAddRumpf() throws Exception {
 //TODO: Test goes here... 
-} 
+    }
 
-/** 
-* 
-* Method: addArm(Arm arm) 
-* 
-*/ 
-@Test
-public void testAddArm() throws Exception { 
+    /**
+     *
+     * Method: addArm(Arm arm)
+     *
+     */
+    @Test
+    public void testAddArm() throws Exception {
 //TODO: Test goes here... 
-} 
+    }
 
-/** 
-* 
-* Method: addKettenantrieb(Kettenantrieb kettenAntrieb) 
-* 
-*/ 
-@Test
-public void testAddKettenantrieb() throws Exception { 
+    /**
+     *
+     * Method: addKettenantrieb(Kettenantrieb kettenAntrieb)
+     *
+     */
+    @Test
+    public void testAddKettenantrieb() throws Exception {
 //TODO: Test goes here... 
-} 
+    }
 
-/** 
-* 
-* Method: addThreadee(SpielzeugRoboter threadee) 
-* 
-*/ 
-@Test
-public void testAddThreadee() throws Exception { 
+    /**
+     *
+     * Method: addThreadee(SpielzeugRoboter threadee)
+     *
+     */
+    @Test
+    public void testAddThreadee() throws Exception {
 //TODO: Test goes here... 
-} 
+    }
 
-/** 
-* 
-* Method: pollAuge() 
-* 
-*/ 
-@Test
-public void testPollAuge() throws Exception { 
+    /**
+     *
+     * Method: pollAuge()
+     *
+     */
+    @Test
+    public void testPollAuge() throws Exception {
 //TODO: Test goes here... 
-} 
+    }
 
-/** 
-* 
-* Method: pollRumpf() 
-* 
-*/ 
-@Test
-public void testPollRumpf() throws Exception { 
+    /**
+     *
+     * Method: pollRumpf()
+     *
+     */
+    @Test
+    public void testPollRumpf() throws Exception {
 //TODO: Test goes here... 
-} 
+    }
 
-/** 
-* 
-* Method: pollArm() 
-* 
-*/ 
-@Test
-public void testPollArm() throws Exception { 
+    /**
+     *
+     * Method: pollArm()
+     *
+     */
+    @Test
+    public void testPollArm() throws Exception {
 //TODO: Test goes here... 
-} 
+    }
 
-/** 
-* 
-* Method: pollKettenantrieb() 
-* 
-*/ 
-@Test
-public void testPollKettenantrieb() throws Exception { 
+    /**
+     *
+     * Method: pollKettenantrieb()
+     *
+     */
+    @Test
+    public void testPollKettenantrieb() throws Exception {
 //TODO: Test goes here... 
-} 
+    }
 
-/** 
-* 
-* Method: pollThreadee() 
-* 
-*/ 
-@Test
-public void testPollThreadee() throws Exception { 
+    /**
+     *
+     * Method: pollThreadee()
+     *
+     */
+    @Test
+    public void testPollThreadee() throws Exception {
 //TODO: Test goes here... 
-} 
-
-
+    }
 } 
