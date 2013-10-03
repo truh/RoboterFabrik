@@ -36,13 +36,59 @@ public class SpielzeugRoboter implements Stringifyable {
 	 * @see Stringifyable#toCSV()
 	 */
 	public String toCSV() {
-		return null;
+		StringBuilder s = new StringBuilder();
+    	s.append(auge1.toCSV());
+    	s.append(auge2.toCSV());
+    	s.append(rumpf.toCSV());
+    	s.append(kettenantrieb.toCSV());
+    	s.append(arm1.toCSV());
+    	s.append(arm2.toCSV());
+    	
+    	
+        return s.toString();
 	}
 
     @Override
-    public void fromCSV(String csv)
-    {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public void fromCSV(String csv){
+    	String[] items = csv.replaceAll("Threadee-ID","").replaceAll("Mitarbeiter-ID","").replaceAll("Auge,","").replaceAll("Arm,","").replaceAll("Rumpf,","").replaceAll("Kettenantrieb,","").split(",");
+    	int[] zahlen= new int[122];
+    	int[] ein = new int[20];
+    	for(int i = 0;i<zahlen.length;i++){
+    		zahlen[i]=Integer.parseInt(items[i]);
+    	}
+    	int z = 2;
+    	id = zahlen[0];
+    	mitarbeiterId = zahlen[1];
+    	for(int i=0;i<20;i++){
+    		ein[i] = zahlen[z];
+    		z++;
+    	}
+    	auge1.setZahlen(ein);
+    	for(int i=0;i<20;i++){
+    		ein[i] = zahlen[z];
+    		z++;
+    	}
+    	auge2.setZahlen(ein);
+    	for(int i=0;i<20;i++){
+    		ein[i] = zahlen[z];
+    		z++;
+    	}
+    	rumpf.setZahlen(ein);
+    	for(int i=0;i<20;i++){
+    		ein[i] = zahlen[z];
+    		z++;
+    	}
+    	kettenantrieb.setZahlen(ein);
+    	for(int i=0;i<20;i++){
+    		ein[i] = zahlen[z];
+    		z++;
+    	}
+    	arm1.setZahlen(ein);
+    	for(int i=0;i<20;i++){
+    		ein[i] = zahlen[z];
+    		z++;
+    	}
+    	arm2.setZahlen(ein);
     }
 
 }
