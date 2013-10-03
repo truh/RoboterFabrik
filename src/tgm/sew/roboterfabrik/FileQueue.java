@@ -21,6 +21,8 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
 
 	/**
 	 * @param filePfad Pfad an dem FileStack seine Elemente speichern soll.
+     * @throws IOException
+     * @throws NullPointerException wenn genericType == null
 	 */
 	public FileQueue(String filePfad, Class<E> genericType) throws IOException
     {
@@ -29,6 +31,11 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             Files.delete(FileSystems.getDefault().getPath("build", "test"));
         }
         this.filePfad = filePfad;
+
+        if(genericType == null) {
+            throw new NullPointerException();
+        }
+
         this.genericType = genericType;
 	}
 
@@ -41,11 +48,7 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
      * @throws InstantiationException
      */
     private synchronized Queue<E> readQueue() throws IOException, IllegalAccessException, InstantiationException
-    {   //Queue sollte in diesen Fall ohnehin leer sein.
-        if(genericType == null){
-            return new LinkedList<E>();
-        }
-
+    {
         BufferedReader br;
         try{
             br = new BufferedReader(new FileReader(filePfad));
