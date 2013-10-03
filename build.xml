@@ -53,8 +53,8 @@
             <fileset dir="src" />
         </copy>
         <mkdir dir="${jar.temp}/javadoc"/>
-        <javac srcdir="${build.dir}/src" destdir="${jar.temp}/javadoc">
-        </javac>
+        <javadoc sourcepath="${build.dir}/src" destdir="${jar.temp}/javadoc">
+        </javadoc>
     </target>
 
     <target name="jar" depends="compile, javadoc" description="create a Jar file for the application">

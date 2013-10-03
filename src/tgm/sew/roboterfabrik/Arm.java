@@ -32,18 +32,18 @@ public class Arm implements Teil {
     }
     
     /**
-     * Fügt die Zahlen im String von toCSV in das Attribut zahlen[];
+     * Fuegt die Zahlen im String von toCSV in das Attribut zahlen[];
      */
     @Override
     public void fromCSV(String csv){
-    	String[] items = csv.replaceAll("Arm,","").split(",");// löscht das Wort raus und trennt mit den "," die Zahlen im String
+    	String[] items = csv.replaceAll("Arm,","").split(",");// loescht das Wort raus und trennt mit den "," die Zahlen im String
     	for(int i = 0 ;i<zahlen.length;i++){
     		zahlen[i]=Integer.parseInt(items[i]);
     	}
         
     }
     /**
-     * getter und setter methoden erklären sich von selbst
+     * getter und setter methoden erklaeren sich von selbst
      */
     @Override
     public int[] getZahlen()

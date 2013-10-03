@@ -48,7 +48,7 @@ public class SpielzeugRoboter implements Stringifyable {
         return s.toString();
 	}
 	 /**
-     * Fügt die Zahlen im String von toCSV in das Attribut zahlen[] von den jeweiligen teil objekt hinzu;
+     * Fuegt die Zahlen im String von toCSV in das Attribut zahlen[] von den jeweiligen teil objekt hinzu;
      */
     @Override
     public void fromCSV(String csv){

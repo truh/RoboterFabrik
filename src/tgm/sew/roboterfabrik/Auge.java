@@ -8,7 +8,7 @@ public class Auge implements Teil {
 	private int [] zahlen;
 
 	/**
-	 * FÃ¼llt zahlen mit Zufallszahlen
+	 * Fuellt zahlen mit Zufallszahlen
 	 */
 	public Auge() {
 		name = "Auge";
@@ -33,12 +33,12 @@ public class Auge implements Teil {
     }
     
     /**
-     * Fügt die Zahlen im String von toCSV in das Attribut zahlen[];
+     * Fuegt die Zahlen im String von toCSV in das Attribut zahlen[];
      */
     @Override
     public void fromCSV(String csv)
     {
-    	String[] items = csv.replaceAll("Auge,","").split(",");// löscht das Wort raus und trennt mit den "," die Zahlen im String
+    	String[] items = csv.replaceAll("Auge,","").split(",");// loescht das Wort raus und trennt mit den "," die Zahlen im String
     	for(int i = 0 ;i<zahlen.length;i++){
     		zahlen[i]=Integer.parseInt(items[i]);
     	}
