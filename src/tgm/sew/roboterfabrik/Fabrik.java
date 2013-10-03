@@ -27,7 +27,6 @@ public class Fabrik {
 	
 	public Fabrik(int laufzeit, int numLieferanten, int numMonteure, String filePfad) {
 		
-		ThreadFactory threadFactory = Executors.defaultThreadFactory();
 		montageMitarbeiterPool = new ThreadPoolExecutor(numMonteure, numMonteure, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(numMonteure));
 		liferantenPool = new ThreadPoolExecutor( numLieferanten, numLieferanten, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>( numLieferanten));
 		kundenPool = new ThreadPoolExecutor(1, 1, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(1));
