@@ -38,12 +38,9 @@ public class Fabrik {
 			liferantenPool.execute(new Lieferant(lagerMitarbeiter));
         }
 		kundenPool.execute(new Kunde(lagerMitarbeiter));
-		lagerMitarbeiterPool.execute(new LagerMitarbeiter(filePfad));
+		lagerMitarbeiterPool.execute(new LagerMitarbeiter(sekretariat.getUniqueID(), filePfad));
     }
- 
-
-			
-	}
+}
 	
 	
 
