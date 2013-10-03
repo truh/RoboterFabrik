@@ -16,7 +16,9 @@ public class Arm implements Teil {
             zahlen[i] =(int)(Math.random() * (999 - 1+1)+1);
         }
 	}
-
+	/**
+	 * Wandelt alle Inhalte des Threadee in ein String um
+	 */
     @Override
     public String toCSV() {
     	StringBuilder s = new StringBuilder(43);//Min anzahl der Zeichen im Stringbuilder(arm = 3 Zeiche zahlen = 20 beistriche = 20
@@ -28,7 +30,10 @@ public class Arm implements Teil {
     	
         return s.toString();
     }
-
+    
+    /**
+     * Fügt die Zahlen im String von toCSV in das Attribut zahlen[];
+     */
     @Override
     public void fromCSV(String csv){
     	String[] items = csv.replaceAll("Arm,","").split(",");// löscht das Wort raus und trennt mit den "," die Zahlen im String
@@ -37,14 +42,13 @@ public class Arm implements Teil {
     	}
         
     }
-
     /**
-     * Zuffalszahlen um dem Montagemitarbeiter Arbeit zu bereiten
+     * getter und setter methoden erklären sich von selbst
      */
     @Override
     public int[] getZahlen()
     {
-        return zahlen;  //To change body of implemented methods use File | Settings | File Templates.
+        return zahlen; 
     }
 
     /**

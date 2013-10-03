@@ -17,7 +17,9 @@ public class Auge implements Teil {
             zahlen[i] =(int)(Math.random() * (999 - 1+1)+1);
         }
 	}
-
+	/**
+	 * Wandelt alle Inhalte des Threadee in ein String um
+	 */
     @Override
     public String toCSV() {
     	StringBuilder s = new StringBuilder(44);//Min anzahl der Zeichen im Stringbuilder(auge = 4 Zeiche zahlen = 20 beistriche = 20
@@ -29,7 +31,10 @@ public class Auge implements Teil {
     	
         return s.toString();
     }
-
+    
+    /**
+     * Fügt die Zahlen im String von toCSV in das Attribut zahlen[];
+     */
     @Override
     public void fromCSV(String csv)
     {

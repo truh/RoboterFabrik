@@ -5,6 +5,8 @@ package tgm.sew.roboterfabrik;
 public class Kunde implements Stoppable {
 
 	private LagerMitarbeiter lagerMitarbeiter;
+	
+	private SpielzeugRoboter spielzeugRoboter;
 
 	/**
 	 * @param lagerMitarbeiter LagerMitarbeiter an den Bestellungen gestellt werden sollen
@@ -27,7 +29,7 @@ public class Kunde implements Stoppable {
 	public void run()
 	{
 		while(true){
-			// Anfrage an den Lagermitarbeiter
+			lagerMitarbeiter.anfrage(null);
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {

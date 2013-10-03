@@ -86,12 +86,12 @@ public class MontageMitarbeiter implements Mitarbeiter {
 				arm2.setZahlen(arm2zahlen);
 				rumpf.setZahlen(rumpfzahlen);
 				kettenantrieb.setZahlen(kettenantriebzahlen);
+				id = sekretariat.getUniqueID();
+				mitarbeiterId = sekretariat.getUniqueMitarbeiterID();
+				spielzeugRoboter = new SpielzeugRoboter(id, mitarbeiterId ,auge1, auge2,rumpf,kettenantrieb,arm1, arm2);
+				lagerMitarbeiter.einlagern(spielzeugRoboter);
 				
-			}
-			id = sekretariat.getUniqueID();
-			mitarbeiterId = sekretariat.getUniqueMitarbeiterID();
-			spielzeugRoboter = new SpielzeugRoboter(id, mitarbeiterId ,auge1, auge2,rumpf,kettenantrieb,arm1, arm2);
-			lagerMitarbeiter.einlagern(spielzeugRoboter);
+				}
 			}
         }
 

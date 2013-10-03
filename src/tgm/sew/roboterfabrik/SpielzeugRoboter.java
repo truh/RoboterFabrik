@@ -33,7 +33,7 @@ public class SpielzeugRoboter implements Stringifyable {
 
 
 	/**
-	 * @see Stringifyable#toCSV()
+	 * Wandelt alles was in den Teilen ist in ein String
 	 */
 	public String toCSV() {
 		StringBuilder s = new StringBuilder();
@@ -47,7 +47,9 @@ public class SpielzeugRoboter implements Stringifyable {
     	
         return s.toString();
 	}
-
+	 /**
+     * Fügt die Zahlen im String von toCSV in das Attribut zahlen[] von den jeweiligen teil objekt hinzu;
+     */
     @Override
     public void fromCSV(String csv){
     	String[] items = csv.replaceAll("Threadee-ID","").replaceAll("Mitarbeiter-ID","").replaceAll("Auge,","").replaceAll("Arm,","").replaceAll("Rumpf,","").replaceAll("Kettenantrieb,","").split(",");

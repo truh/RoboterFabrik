@@ -17,7 +17,9 @@ public class Rumpf implements Teil {
             zahlen[i] =(int)(Math.random() * (999 - 1+1)+1);
         }
 	}
-
+	/**
+	 * Wandelt alle Inhalte des Threadee in ein String um
+	 */
     @Override
     public String toCSV() {
     	StringBuilder s = new StringBuilder(45);//Min anzahl der Zeichen im Stringbuilder(Rumpf = 5 Zeiche zahlen = 20 beistriche = 20
@@ -29,7 +31,9 @@ public class Rumpf implements Teil {
     	
         return s.toString();
     }
-
+    /**
+     * Fügt die Zahlen im parameter String in das Attribut zahlen[];
+     */
     @Override
     public void fromCSV(String csv){
     	String[] items = csv.replaceAll("Rumpf,","").split(",");// löscht das Wort raus und trennt mit den "," die Zahlen im String
