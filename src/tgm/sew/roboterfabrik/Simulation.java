@@ -43,5 +43,12 @@ public class Simulation {
         log.info("monteure:\t" + cmd.getOptionValue("monteure"));
         log.info("laufzeit:\t" + cmd.getOptionValue("laufzeit"));
 
+        String lagerPfad = cmd.getOptionValue("lager");
+        String logsPfad = cmd.getOptionValue("logs");
+        int numLieferanten = Integer.parseInt(cmd.getOptionValue("lieferanten"));
+        int numMonteure = Integer.parseInt(cmd.getOptionValue("monteure"));
+        int laufzeit = Integer.parseInt(cmd.getOptionValue("laufzeit"));
+
+        Fabrik fabrik = new Fabrik(laufzeit, numLieferanten, numMonteure, lagerPfad);
     }
 }
