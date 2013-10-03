@@ -1,6 +1,12 @@
 package tgm.sew.roboterfabrik;
 
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class Fabrik {
 
@@ -17,12 +23,18 @@ public class Fabrik {
 	private Sekretariat sekretariat;
 
 	private Lager lager;
-
+	
+	
 	public Fabrik(int laufzeit, int numLieferanten, int numMonteure, String filePfad) {
-		montageMitarbeiterPool = new ThreadPoolExecutor(1,numMonteure,laufzeit,null);
+		
+		ThreadFactory threadFactory = Executors.defaultThreadFactory();
+		ThreadPoolExecutor executorPoolmon = new ThreadPoolExecutor(0, numMonteure, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(2), threadFactory);
+		ThreadPoolExecutor executorPoollief = new ThreadPoolExecutor(0, numLieferanten, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(2), threadFactory);
+    }
+ 
+
 			
 	}
 	
 	
 
-}
