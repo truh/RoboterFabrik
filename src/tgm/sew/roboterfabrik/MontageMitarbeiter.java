@@ -22,6 +22,8 @@ public class MontageMitarbeiter implements Mitarbeiter {
 	
 	private SpielzeugRoboter spielzeugRoboter;
 	
+	private boolean stop;
+	
 	/**
 	 * 
 	 * @param id
@@ -32,7 +34,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 		this.id = id;
 		this.sekretariat=sekretariat;
 		this.lagerMitarbeiter=lagerMitarbeiter;
-		
+		stop =false;
 
 	}
 	
@@ -40,14 +42,14 @@ public class MontageMitarbeiter implements Mitarbeiter {
 	 * @see Stoppable#stop()
 	 */
 	public void stop() {
-		
+		stop = true;
 	}
 	/**
 	 * Hier werden die zahlen in den Einzelnen Teilen sortiert und danach der Roboter erstellt und vom lagermitarbeiter ins Lager
 	 * gestellt
 	 */
 	public void run(){
-		while(true){
+		while(!stop){
 			this.auge1=(Auge)lagerMitarbeiter.anfrage(Auge.class);
 			this.auge2=(Auge)lagerMitarbeiter.anfrage(Auge.class);
 			this.arm1=(Arm)lagerMitarbeiter.anfrage(Arm.class);
@@ -73,6 +75,12 @@ public class MontageMitarbeiter implements Mitarbeiter {
 				lagerMitarbeiter.einlagern(auge2);
 				lagerMitarbeiter.einlagern(rumpf);
 				lagerMitarbeiter.einlagern(kettenantrieb);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}else{
 				auge1zahlen=sortieren(auge1zahlen);
 				auge2zahlen=sortieren(auge2zahlen);
@@ -90,19 +98,24 @@ public class MontageMitarbeiter implements Mitarbeiter {
 				mitarbeiterId = sekretariat.getUniqueMitarbeiterID();
 				spielzeugRoboter = new SpielzeugRoboter(id, mitarbeiterId ,auge1, auge2,rumpf,kettenantrieb,arm1, arm2);
 				lagerMitarbeiter.einlagern(spielzeugRoboter);
-				
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				}
 			}
         }
 
     @Override
     public int getId() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return mitarbeiterId; 
     }
 
     @Override
     public Sekretariat getSekretariat() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return sekretariat;
     }
     public static int[] sortieren(int[] zahlen){
     	int speicher ;

@@ -7,6 +7,8 @@ public class Kunde implements Stoppable {
 	private LagerMitarbeiter lagerMitarbeiter;
 	
 	private SpielzeugRoboter spielzeugRoboter;
+	
+	private boolean stop;
 
 	/**
 	 * @param lagerMitarbeiter LagerMitarbeiter an den Bestellungen gestellt werden sollen
@@ -19,7 +21,7 @@ public class Kunde implements Stoppable {
 	 * @see Stoppable#stop()
 	 */
 	public void stop() {
-
+		stop = true;
 	}
 
 	/**
@@ -28,8 +30,8 @@ public class Kunde implements Stoppable {
 	 */
 	public void run()
 	{
-		while(true){
-			lagerMitarbeiter.anfrage(null);
+		while(!stop){
+			lagerMitarbeiter.anfrage(SpielzeugRoboter.class);
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {

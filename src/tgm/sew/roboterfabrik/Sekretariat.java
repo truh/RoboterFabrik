@@ -26,8 +26,5 @@ public class Sekretariat {
 		mitarbeiterId++;
 		return mitarbeiterId;
 	}
-	public Sekretariat(int laufzeit, int numLieferanten, int numMonteure, String filePfad) {
-
-	}
 
 }
