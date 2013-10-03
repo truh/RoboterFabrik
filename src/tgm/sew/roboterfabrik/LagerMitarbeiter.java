@@ -33,6 +33,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
         } catch (IOException e)
         {
             logger.log(Level.FINER, "LagerMitarbeiter#LagerMitarbeiter(int, String): Erzeugen des Lagers", e);
+            e.printStackTrace();
         }
         einlagernQueue = new ArrayBlockingQueue<Stringifyable>(50);
     }

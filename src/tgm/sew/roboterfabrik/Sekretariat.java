@@ -1,6 +1,13 @@
 package tgm.sew.roboterfabrik;
+<<<<<<< HEAD
 import java.util.HashSet;
 // Id fuer Roboter und Mitarbeiter wird vergeben
+=======
+
+/**
+ * Id fuer Roboter und Mitarbeiter wird vergeben
+ */
+>>>>>>> fc51f361b5c4e0f5c25fd1d367a4d4facf0b0eb8
 public class Sekretariat {
 	
 	private int id=100;

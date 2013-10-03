@@ -5,6 +5,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.io.*;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.nio.file.attribute.FileAttribute;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -27,11 +28,15 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
 	 */
 	public FileQueue(String filePfad, Class<E> genericType) throws IOException
     {
-        //Datei löschen wenn die existiert
-        if(new File("build/test").exists()){
-            Files.delete(FileSystems.getDefault().getPath("build", "test"));
-        }
         this.filePfad = filePfad;
+
+        if(!new File(filePfad).getParentFile().exists()){
+            System.out.println(new File(filePfad).mkdir());
+        }
+
+        if(!new File(filePfad).exists()){
+            new File(filePfad).createNewFile();
+        }
 
         if(genericType == null) {
             throw new NullPointerException();

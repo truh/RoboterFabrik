@@ -2,7 +2,7 @@ lib
 out
 src/Start.java
 bin
-log.txt
+log.txt*
 log*.txt
 
 #temp files
