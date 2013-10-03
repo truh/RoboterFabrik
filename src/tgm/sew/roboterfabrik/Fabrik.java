@@ -20,11 +20,17 @@ public class Fabrik {
 
 	private LagerMitarbeiter lagerMitarbeiter;
 
-	private Sekretariat sekretariat;
+	private Sekretariat sekretariat = new Sekretariat();
 
 	private Lager lager;
 	
-	
+	/**
+	 * Hier werden die ThreadPools verwaltet
+	 * @param laufzeit	Wie lang (in ms) die Threads laufen
+	 * @param numLieferanten Wie viele Lieferanten Threads laufe
+	 * @param numMonteure Wie viele MontageMitarbeiter Threads max laufen
+	 * @param filePfad Der Filepath für den lagermitarbeiter
+	 */
 	public Fabrik(int laufzeit, int numLieferanten, int numMonteure, String filePfad) {
 		
 		montageMitarbeiterPool = new ThreadPoolExecutor(numMonteure, numMonteure, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(numMonteure));

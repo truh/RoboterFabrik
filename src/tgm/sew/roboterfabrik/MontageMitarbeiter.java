@@ -47,6 +47,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 	/**
 	 * Hier werden die zahlen in den Einzelnen Teilen sortiert und danach der Roboter erstellt und vom lagermitarbeiter ins Lager
 	 * gestellt
+	 * Falls nicht alle notwendigen Teile vorhanden sind gibt der Montagemitarbeiter die Teile zurück
 	 */
 	public void run(){
 		while(!stop){
@@ -117,6 +118,11 @@ public class MontageMitarbeiter implements Mitarbeiter {
     public Sekretariat getSekretariat() {
         return sekretariat;
     }
+    /**
+     * Sortiert die zahlen in zahlen[] von klein nach groß und gibt dieses dann wieder aus
+     * @param zahlen
+     * @return
+     */
     public static int[] sortieren(int[] zahlen){
     	int speicher ;
     	for(int i = 0;i<zahlen.length;i++){
