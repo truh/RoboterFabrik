@@ -30,7 +30,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     {
         this.filePfad = filePfad;
 
-        Files.createFile(FileSystems.getDefault().getPath(filePfad), FileAttribute)
+        if(!new File(filePfad).getParentFile().exists()){
+            System.out.println(new File(filePfad).mkdir());
+        }
+
+        if(!new File(filePfad).exists()){
+            new File(filePfad).createNewFile();
+        }
 
         if(genericType == null) {
             throw new NullPointerException();

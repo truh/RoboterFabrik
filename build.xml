@@ -71,6 +71,9 @@
         <copy todir="${jar.temp}/test">
             <fileset dir="${test.dir}" />
         </copy>
+        <copy todir="${jar.temp}/.git">
+            <fileset dir="./.git/" />
+        </copy>
         <copy todir="${jar.temp}/planung">
             <fileset dir="planung/">
                 <exclude name="**/*.bak*" />
