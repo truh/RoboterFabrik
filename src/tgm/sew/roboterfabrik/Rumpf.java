@@ -8,7 +8,7 @@ public class Rumpf implements Teil {
 	private int [] zahlen;
 
 	/**
-	 * FÃ¼llt zahlen mit Zufallszahlen
+	 * Fuellt zahlen mit Zufallszahlen
 	 */
 	public Rumpf() {
 		name = "Rumpf";
@@ -32,11 +32,11 @@ public class Rumpf implements Teil {
         return s.toString();
     }
     /**
-     * Fügt die Zahlen im parameter String in das Attribut zahlen[];
+     * Fuegt die Zahlen im parameter String in das Attribut zahlen[];
      */
     @Override
     public void fromCSV(String csv){
-    	String[] items = csv.replaceAll("Rumpf,","").split(",");// löscht das Wort raus und trennt mit den "," die Zahlen im String
+    	String[] items = csv.replaceAll("Rumpf,","").split(",");// loescht das Wort raus und trennt mit den "," die Zahlen im String
     	for(int i = 0 ;i<zahlen.length;i++){
     		zahlen[i]=Integer.parseInt(items[i]);
     	}
@@ -48,7 +48,7 @@ public class Rumpf implements Teil {
     @Override
     public int[] getZahlen()
     {
-        return zahlen;  //To change body of implemented methods use File | Settings | File Templates.
+        return zahlen;
     }
 
 	@Override

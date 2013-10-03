@@ -47,7 +47,17 @@
         </javac>
     </target>
 
-    <target name="jar" depends="compile" description="create a Jar file for the application">
+    <target name="javadoc">
+        <mkdir dir="${class.dir}"/>
+        <copy todir="${build.dir}/src">
+            <fileset dir="src" />
+        </copy>
+        <mkdir dir="${jar.temp}/javadoc"/>
+        <javadoc sourcepath="${build.dir}/src" destdir="${jar.temp}/javadoc">
+        </javadoc>
+    </target>
+
+    <target name="jar" depends="compile, javadoc" description="create a Jar file for the application">
         <!-- extract lib contents to jar -->
         <copy todir="${jar.temp}">
             <zipfileset src="lib/commons-cli-${cgi.ver}.jar" excludes="**/META-INF/*" />

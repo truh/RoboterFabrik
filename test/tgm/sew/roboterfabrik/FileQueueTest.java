@@ -60,7 +60,7 @@ public class FileQueueTest
 
     @Test
     public void testAdd() {
-        Assert.assertTrue("Hinzufügen eines Elementes sollte funktioniere", fq.add(new Arm()));
+        Assert.assertTrue("Hinzufuegen eines Elementes sollte funktioniere", fq.add(new Arm()));
     }
 
     @Test
@@ -109,7 +109,7 @@ public class FileQueueTest
         arme.add(arm2);
         fq.addAll(arme);
         Assert.assertTrue("Elemente sollten enthalten sein", fq.containsAll(arme));
-        Assert.assertTrue("Elemente sollten entfernt werden können",fq.removeAll(arme));
+        Assert.assertTrue("Elemente sollten entfernt werden koennen",fq.removeAll(arme));
         Assert.assertFalse("Elemente sollten nicht mehr enthalten sein", fq.containsAll(arme));
     }
 
@@ -137,7 +137,7 @@ public class FileQueueTest
 
     @Test
     public void testOffer() {
-        Assert.assertTrue("Sollte möglich sein ein Element hinzuzufügen", fq.offer(new Arm()));
+        Assert.assertTrue("Sollte moeglich sein ein Element hinzuzufuegen", fq.offer(new Arm()));
     }
 
     @Test
@@ -145,7 +145,7 @@ public class FileQueueTest
         fq.add(new Arm());
         int size = fq.size();
         fq.remove();
-        Assert.assertTrue("Sollte möglich sein das head Element zu entfernen", size > fq.size());
+        Assert.assertTrue("Sollte moeglich sein das head Element zu entfernen", size > fq.size());
     }
 
     @Test

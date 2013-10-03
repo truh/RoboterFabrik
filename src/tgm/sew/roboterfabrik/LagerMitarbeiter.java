@@ -2,6 +2,8 @@ package tgm.sew.roboterfabrik;
 
 import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LagerMitarbeiter implements Mitarbeiter {
 
@@ -12,6 +14,8 @@ public class LagerMitarbeiter implements Mitarbeiter {
     private ArrayBlockingQueue <Stringifyable> einlagernQueue;
 
     private boolean stop;
+
+    private Logger logger;
     /**
      * Erstellt einen LagerMitarbeiter welche an gegebenen filePfad ein Lager eröffnet
      *
@@ -19,6 +23,8 @@ public class LagerMitarbeiter implements Mitarbeiter {
      */
     public LagerMitarbeiter(int id, String filePfad)
     {
+        this.logger = Simulation.loggerFactory.getLogger(LagerMitarbeiter.class);
+
         stop = false;
         this.id = id;
         try
@@ -26,7 +32,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
             this.lager = new Lager(filePfad);
         } catch (IOException e)
         {
-            e.printStackTrace();  //ToDo Logger
+            logger.log(Level.FINER, "LagerMitarbeiter#LagerMitarbeiter(int, String): Erzeugen des Lagers", e);
         }
         einlagernQueue = new ArrayBlockingQueue<Stringifyable>(50);
     }
@@ -38,6 +44,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
      * @return Artikel oder null
      */
     public Stringifyable anfrage(Class<? extends Stringifyable> type) {
+        logger.entering("LagerMitarbeiter", "anfrage", type);
         Stringifyable item = null;
 
         if(type == Arm.class)
@@ -60,6 +67,8 @@ public class LagerMitarbeiter implements Mitarbeiter {
         {
             item = lager.pollThreadee();
         }
+
+        logger.exiting("LagerMitarbeiter", "anfrage", item);
 		return item;
 	}
 
@@ -70,6 +79,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
      * @param item Artikel der eingeliefert werden soll
      */
 	public void einlagern(Stringifyable item) {
+        logger.entering("LagerMiterbeiter", "einlagern", item);
         this.einlagernQueue.add(item);
 	}
 
@@ -77,7 +87,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
 	 * @see Stoppable#stop()
 	 */
 	public void stop() {
-
+        this.stop = true;
 	}
 
     /**
@@ -110,6 +120,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
                 {
                     lager.addThreadee((SpielzeugRoboter) item);
                 }
+                logger.log(Level.INFO, "Artikel wurde ins Lager gelegt", item);
             }
         }
 	}

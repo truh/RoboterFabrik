@@ -5,6 +5,7 @@ import tgm.sew.roboterfabrik.logging.LoggerFactory;
 
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class Simulation {
@@ -12,7 +13,7 @@ public class Simulation {
 	public static void main(String [] args) {
         try
         {
-            loggerFactory = new LoggerFactory("log.txt"); //todo CLI eingabe als Pfad wählen
+            loggerFactory = new LoggerFactory("log.txt"); //todo CLI eingabe als Pfad waehlen
         } catch (IOException e)
         {
             e.printStackTrace();
