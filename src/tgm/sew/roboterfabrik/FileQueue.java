@@ -1,6 +1,7 @@
 package tgm.sew.roboterfabrik;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import tgm.sew.roboterfabrik.logging.LoggerFactory;
 
 import java.io.*;
 import java.nio.file.FileSystems;
@@ -20,6 +21,8 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
 
 	private String filePfad;
     private Class<E> genericType;
+    private Logger logger;
+    private String fullFilePath;
 
 	/**
 	 * @param filePfad Pfad an dem FileStack seine Elemente speichern soll.
@@ -28,14 +31,18 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
 	 */
 	public FileQueue(String filePfad, Class<E> genericType) throws IOException
     {
+        this.logger = new LoggerFactory().getLogger(FileQueue.class);
         this.filePfad = filePfad;
 
-        if(!new File(filePfad).getParentFile().exists()){
-            System.out.println(new File(filePfad).mkdir());
+        if(!new File(filePfad).exists()){
+            logger.info("Verzeichnis: " + filePfad + " wird von FileQueue erstell.");
+            logger.info("Verzeichnis erstellen erfolgreich? " + new File(filePfad).mkdir());
         }
 
         if(!new File(filePfad).exists()){
-            new File(filePfad + File.separator + genericType.getName() + ".txt").createNewFile();
+            fullFilePath = filePfad + File.separator + genericType.getName() + ".csv";
+            logger.info("Datei " + fullFilePath + " wird von FileQueue erstellt.");
+            new File(fullFilePath).createNewFile();
         }
 
         if(genericType == null) {
@@ -57,7 +64,7 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
     {
         BufferedReader br;
         try{
-            br = new BufferedReader(new FileReader(filePfad));
+            br = new BufferedReader(new FileReader(fullFilePath));
         }
         catch (FileNotFoundException fnfe){
             return new LinkedList<E>();
@@ -86,7 +93,7 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
      */
     private synchronized void writeQueue(Queue<E> elemente) throws IOException
     {
-        FileWriter fw = new FileWriter(filePfad);
+        FileWriter fw = new FileWriter(fullFilePath);
         for(Iterator<E> it = elemente.iterator(); it.hasNext();){
             fw.write(it.next().toCSV() + "\n");
         }
@@ -109,13 +116,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             return this.readQueue().size();
         } catch (IOException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (IllegalAccessException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (InstantiationException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         return 0; //TODO, verhalten dokumentieren
     }
@@ -163,13 +170,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             return this.readQueue().contains(0);
         } catch (IOException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (IllegalAccessException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (InstantiationException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         return false;
     }
@@ -190,13 +197,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             return this.readQueue().iterator();
         } catch (IOException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (IllegalAccessException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (InstantiationException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         return null;
     }
@@ -225,13 +232,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             return this.readQueue().toArray();
         } catch (IOException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (IllegalAccessException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (InstantiationException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -271,13 +278,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             queue = this.readQueue();
         } catch (IOException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (IllegalAccessException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (InstantiationException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         }
 
         boolean b = queue.add(e);
@@ -322,13 +329,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             queue = this.readQueue();
         } catch (IOException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (IllegalAccessException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (InstantiationException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         }
 
         boolean b = queue.remove(o);
@@ -370,13 +377,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             return this.readQueue().containsAll(c);
         } catch (IOException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (IllegalAccessException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (InstantiationException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         return false;//Todo nochmal drüber nachdenken
     }
@@ -414,13 +421,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             queue = this.readQueue();
         } catch (IOException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (IllegalAccessException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (InstantiationException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         }
 
         boolean b = queue.addAll(c);
@@ -468,13 +475,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             queue = this.readQueue();
         } catch (IOException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (IllegalAccessException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (InstantiationException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         }
 
         boolean b = queue.removeAll(c);
@@ -521,13 +528,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             queue = this.readQueue();
         } catch (IOException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (IllegalAccessException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (InstantiationException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         }
 
         boolean b = queue.retainAll(c);
@@ -558,7 +565,7 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             this.writeQueue(new LinkedList<E>());
         } catch (IOException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 
@@ -588,13 +595,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             queue = this.readQueue();
         } catch (IOException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (IllegalAccessException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (InstantiationException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         }
 
         boolean b = queue.offer(e);
@@ -628,13 +635,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             queue = this.readQueue();
         } catch (IOException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (IllegalAccessException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (InstantiationException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         }
 
         E element = queue.remove();
@@ -665,13 +672,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             queue = this.readQueue();
         } catch (IOException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (IllegalAccessException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (InstantiationException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         }
 
         E element = queue.poll();
@@ -705,13 +712,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             queue = this.readQueue();
         } catch (IOException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (IllegalAccessException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (InstantiationException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         }
 
         E element = queue.element();
@@ -742,13 +749,13 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
             queue = this.readQueue();
         } catch (IOException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (IllegalAccessException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         } catch (InstantiationException e1)
         {
-            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e1.printStackTrace();
         }
 
         E element = queue.peek();

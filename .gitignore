@@ -4,6 +4,7 @@ src/Start.java
 bin
 log.txt*
 log*.txt
+log
 
 #temp files
 *.bak
