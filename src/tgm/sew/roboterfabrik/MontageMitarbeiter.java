@@ -51,10 +51,6 @@ public class MontageMitarbeiter implements Mitarbeiter {
 		try {
 			this.logger = new LoggerFactory().getLogger(FileQueue.class);
 		} catch (IllegalArgumentException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -69,11 +65,11 @@ public class MontageMitarbeiter implements Mitarbeiter {
 	/**
 	 * Hier werden die zahlen in den Einzelnen Teilen sortiert und danach der Roboter erstellt und vom lagermitarbeiter ins Lager
 	 * gestellt
-	 * Falls nicht alle notwendigen Teile vorhanden sind gibt der Montagemitarbeiter die Teile zurück
+	 * Falls nicht alle notwendigen Teile vorhanden sind gibt der Montagemitarbeiter die Teile zurï¿½ck
 	 */
 	public void run(){
 		while(!stop){
-			// Die Objekte für den Roboter werden von dem lagermitarbeiter angefordert
+			// Die Objekte fï¿½r den Roboter werden von dem lagermitarbeiter angefordert
 			this.auge1=(Auge)lagerMitarbeiter.anfrage(Auge.class);
 			this.auge2=(Auge)lagerMitarbeiter.anfrage(Auge.class);
 			this.arm1=(Arm)lagerMitarbeiter.anfrage(Arm.class);
@@ -101,7 +97,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 			greifer2zahlen = greifer2.getZahlen();
 			int[] antennezahlen ;
 			antennezahlen = antenne.getZahlen();
-			// Falls Montagemitarbeiter ein Objekt nicht erhält legt gibt er alle seine Teile zurück
+			// Falls Montagemitarbeiter ein Objekt nicht erhï¿½lt legt gibt er alle seine Teile zurï¿½ck
 			if((auge1zahlen == null)||(auge2zahlen == null)||(arm1zahlen == null)||(arm2zahlen==null)||(rumpfzahlen==null)||(kettenantriebzahlen==null)||(greifer1zahlen==null)||(greifer2zahlen==null)||(antennezahlen==null)){
 				lagerMitarbeiter.einlagern(arm1);
 				lagerMitarbeiter.einlagern(arm2);
@@ -164,7 +160,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
         return sekretariat;
     }
     /**
-     * Sortiert die zahlen in zahlen[] von klein nach groß und gibt dieses dann wieder aus
+     * Sortiert die zahlen in zahlen[] von klein nach groï¿½ und gibt dieses dann wieder aus
      * @param zahlen
      * @return das sortierte zahlen array
      */

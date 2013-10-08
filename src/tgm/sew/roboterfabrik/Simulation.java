@@ -3,22 +3,17 @@ package tgm.sew.roboterfabrik;
 import org.apache.commons.cli.*;
 import tgm.sew.roboterfabrik.logging.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class Simulation {
-    public static LoggerFactory loggerFactory;
-	public static void main(String [] args) {
-        try
-        {
-            loggerFactory = new LoggerFactory("log.txt"); //todo CLI eingabe als Pfad waehlen
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        Logger log = loggerFactory.getLogger(Simulation.class);
+	public static void main(String [] args) throws IOException
+    {
+
+        Logger log = Logger.getLogger("Simulation, initialisierung");
 
         Options options = new Options();
         options.addOption("la", "lager", true, "Pfad zum Lager");
@@ -49,6 +44,10 @@ public class Simulation {
         int numLieferanten = Integer.parseInt(cmd.getOptionValue("lieferanten"));
         int numMonteure = Integer.parseInt(cmd.getOptionValue("monteure"));
         int laufzeit = Integer.parseInt(cmd.getOptionValue("laufzeit"));
+
+        LoggerFactory loggerFactory = new LoggerFactory(logsPfad + File.separator + "log.txt");
+
+        log = loggerFactory.getLogger(Simulation.class);
 
         Fabrik fabrik = new Fabrik(laufzeit, numLieferanten, numMonteure, lagerPfad);
     }

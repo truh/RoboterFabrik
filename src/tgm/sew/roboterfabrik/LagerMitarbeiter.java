@@ -1,5 +1,7 @@
 package tgm.sew.roboterfabrik;
 
+import tgm.sew.roboterfabrik.logging.LoggerFactory;
+
 import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
@@ -23,7 +25,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
      */
     public LagerMitarbeiter(int id, String filePfad)
     {
-        this.logger = Simulation.loggerFactory.getLogger(LagerMitarbeiter.class);
+        this.logger = new LoggerFactory().getLogger(LagerMitarbeiter.class);
 
         stop = false;
         this.id = id;

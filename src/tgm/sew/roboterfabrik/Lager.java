@@ -24,11 +24,11 @@ public class Lager
      */
     public Lager(String filePfad) throws IOException
     {
-        this.augen = new FileQueue<Auge>(filePfad + File.separator + "augen.csv", Auge.class);
-        this.arme = new FileQueue<Arm>(filePfad + File.separator + "arme.csv", Arm.class);
-        this.ruempfe = new FileQueue<Rumpf>(filePfad + File.separator + "ruempfe.csv", Rumpf.class);
-        this.kettenAntriebe = new FileQueue<Kettenantrieb>(filePfad + File.separator + "kettenAntriebe.csv", Kettenantrieb.class);
-        this.threadees = new FileQueue<SpielzeugRoboter>(filePfad + File.separator + "threadees.csv", SpielzeugRoboter.class);
+        this.augen = new FileQueue<Auge>(filePfad + File.separator, Auge.class);
+        this.arme = new FileQueue<Arm>(filePfad + File.separator, Arm.class);
+        this.ruempfe = new FileQueue<Rumpf>(filePfad + File.separator, Rumpf.class);
+        this.kettenAntriebe = new FileQueue<Kettenantrieb>(filePfad + File.separator, Kettenantrieb.class);
+        this.threadees = new FileQueue<SpielzeugRoboter>(filePfad + File.separator, SpielzeugRoboter.class);
     }
 
     /**
