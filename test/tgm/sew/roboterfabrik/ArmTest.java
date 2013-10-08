@@ -6,10 +6,6 @@ import org.junit.Test;
 
 public class ArmTest {
 	private Arm arm = new Arm();
-	@Test
-	public void testArm() {
-		assertEquals("Name","Arm",arm.name);
-	}
 
 	@Test
 	public void testToCSV() {
@@ -27,7 +23,7 @@ public class ArmTest {
 		arm.setZahlen(set);
 		String output = arm.toCSV();
 		int[] seta = new int[]{5,2,3,4,5,6,7,8,3,10,11,12,13,14,15,16,17,18,19,21};
-		arm.setZahlen(seta);// zahlen im auge wurden jetzt verändert
+		arm.setZahlen(seta);// zahlen im auge wurden jetzt verï¿½ndert
 		arm.fromCSV(output);// Jetzt ist zahlen wieder wie vorher
 		int[] get = arm.getZahlen();
 		for(int i = 0;i<20;i++){
@@ -47,7 +43,7 @@ public class ArmTest {
 				fr = false;
 			}
 		}
-		assertTrue("Ob die Zahlen zufällig zwischen 1 und 999 erstellt wurden",fr);
+		assertTrue("Ob die Zahlen zufï¿½llig zwischen 1 und 999 erstellt wurden",fr);
 	}
 
 	@Test

@@ -40,10 +40,6 @@ public class Fabrik {
         try {
 			this.logger = new LoggerFactory().getLogger(FileQueue.class);
 		} catch (IllegalArgumentException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
         //LagerMitarbeiterThreadPools und darin LagerMitarbeiterThreads erzeugen
