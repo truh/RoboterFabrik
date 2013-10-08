@@ -35,7 +35,7 @@ public class FileQueue <E extends Stringifyable> implements Queue<E> {
         }
 
         if(!new File(filePfad).exists()){
-            new File(filePfad).createNewFile();
+            new File(filePfad + File.separator + genericType.getName() + ".txt").createNewFile();
         }
 
         if(genericType == null) {

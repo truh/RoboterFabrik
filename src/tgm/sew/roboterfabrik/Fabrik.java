@@ -18,10 +18,7 @@ public class Fabrik {
 
 	private ThreadPoolExecutor liferantenPool;
 
-	private LagerMitarbeiter lagerMitarbeiter;
-	
 	private Sekretariat sekretariat;
-
 
 	private Lager lager;
 	
@@ -30,7 +27,7 @@ public class Fabrik {
 	 * @param laufzeit	Wie lang (in ms) die Threads laufen
 	 * @param numLieferanten Wie viele Lieferanten Threads laufe
 	 * @param numMonteure Wie viele MontageMitarbeiter Threads max laufen
-	 * @param filePfad Der Filepath für den lagermitarbeiter
+	 * @param filePfad Der Filepath fuer den lagermitarbeiter
 	 */
 	public Fabrik(int laufzeit, int numLieferanten, int numMonteure, String filePfad) {
         this.sekretariat = new Sekretariat();
