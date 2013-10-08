@@ -18,13 +18,10 @@ public class Fabrik {
 
 	private ThreadPoolExecutor liferantenPool;
 
-<<<<<<< HEAD
 	private LagerMitarbeiter lagerMitarbeiter;
-
-	private Sekretariat sekretariat = new Sekretariat();
-=======
+	
 	private Sekretariat sekretariat;
->>>>>>> fc51f361b5c4e0f5c25fd1d367a4d4facf0b0eb8
+
 
 	private Lager lager;
 	
