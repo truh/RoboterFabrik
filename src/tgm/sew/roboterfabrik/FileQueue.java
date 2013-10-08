@@ -27,8 +27,9 @@ public class FileQueue<E extends Stringifyable> extends AbstractQueue<E>
      */
     public FileQueue(String filePfad, Class<E> genericType) throws IOException
     {
-        this.logger = new LoggerFactory().getLogger(FileQueue_old.class);
+        this.logger = new LoggerFactory().getLogger(FileQueue.class);
         this.filePfad = filePfad;
+        fullFilePath = filePfad + File.separator + genericType.getName() + ".csv";
 
         if(!new File(filePfad).exists()){
             logger.info("Verzeichnis: " + filePfad + " wird von FileQueue erstell.");
@@ -36,7 +37,6 @@ public class FileQueue<E extends Stringifyable> extends AbstractQueue<E>
         }
 
         if(!new File(filePfad).exists()){
-            fullFilePath = filePfad + File.separator + genericType.getName() + ".csv";
             logger.info("Datei " + fullFilePath + " wird von FileQueue erstellt.");
             new File(fullFilePath).createNewFile();
         }
