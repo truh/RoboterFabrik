@@ -1,5 +1,6 @@
 package tgm.sew.roboterfabrik;
 
+import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -7,6 +8,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
+
+import tgm.sew.roboterfabrik.logging.LoggerFactory;
 
 public class Fabrik {
 
@@ -21,6 +25,8 @@ public class Fabrik {
 	private Sekretariat sekretariat;
 
 	private Lager lager;
+
+	private Logger logger;
 	
 	/**
 	 * Hier werden die ThreadPools verwaltet
@@ -31,27 +37,37 @@ public class Fabrik {
 	 */
 	public Fabrik(int laufzeit, int numLieferanten, int numMonteure, String filePfad) {
         this.sekretariat = new Sekretariat();
-
-        //LagerMitarbeiter erzeugen
+        try {
+			this.logger = new LoggerFactory().getLogger(FileQueue.class);
+		} catch (IllegalArgumentException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        //LagerMitarbeiterThreadPools und darin LagerMitarbeiterThreads erzeugen
         LagerMitarbeiter lagerMitarbeiter = new LagerMitarbeiter(sekretariat.getUniqueID(), filePfad);
         lagerMitarbeiterPool = new ThreadPoolExecutor(1,1, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(1));
         lagerMitarbeiterPool.execute(lagerMitarbeiter);
 
-        //MontageMitarbeiter erzeugen
+        //MontageMitarbeiterThreadPool und darin MontageMitarbeiterThreads erzeugen
 		montageMitarbeiterPool = new ThreadPoolExecutor(numMonteure, numMonteure, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(numMonteure));
         for(int i=0; i<numMonteure; i++){
             montageMitarbeiterPool.execute(new MontageMitarbeiter(sekretariat.getUniqueMitarbeiterID(),sekretariat,lagerMitarbeiter));
         }
 
-        //Lieferanten erzeugen
+        //LieferantenPool und darin LieferantenThreads erzeugen
 		liferantenPool = new ThreadPoolExecutor( numLieferanten, numLieferanten, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(numLieferanten));
         for(int i=0; i<numLieferanten; i++){
             liferantenPool.execute(new Lieferant(lagerMitarbeiter));
         }
 
-        //Kunden erzeugen
+        //KundenPool und darin KundenThreads erzeugen
 		kundenPool = new ThreadPoolExecutor(1, 1, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(1));
         kundenPool.execute(new Kunde(lagerMitarbeiter));
+        
+        logger.log(null);
     }
 }
 	
