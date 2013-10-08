@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class SpielzeugRoboterTest {
-
+	
 	@Test
 	public void testSpielzeugRoboter() {
 		fail("Not yet implemented");
