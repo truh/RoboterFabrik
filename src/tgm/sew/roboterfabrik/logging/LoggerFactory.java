@@ -11,16 +11,37 @@ public class LoggerFactory
     private ConsoleHandler consoleHandler;
     private FileHandler fileHandler;
 
+    protected static String filePattern = "";
+
     /**
-     * @param filePatter pattern für den FileHandler
+     * @param filePattern pattern für den FileHandler
+     *
+     * @throws IOException Problem beim erzeugen der Logdatei
+     * @throws IllegalArgumentException FilePath wurde ungültig gesetzt
      */
-    public LoggerFactory(String filePatter) throws IOException
-    {   //Um in die Kommandozeile zu loggen
+    public LoggerFactory(String filePattern) throws IOException, IllegalArgumentException
+    {
+        if(filePattern == null || filePattern.equals("")) {
+            throw new IllegalArgumentException("filePattern darf nicht \"\" oder null sein");
+        }
+        //Um in die Kommandozeile zu loggen
         consoleHandler = new ConsoleHandler();
         consoleHandler.setFormatter(new RoboFormater());
         //Um in eine Datei zu loggen
-        fileHandler = new FileHandler(filePatter);
+        fileHandler = new FileHandler(filePattern);
         fileHandler.setFormatter(new RoboFormater());
+    }
+
+    /**
+     * Verwendet den zuletzt verwendeten filePath, funktioniert nur wenn
+     * bereits eine Instanz mit gültigen Pfad aufgerufen wurde.
+     *
+     * @throws IOException Problem beim erzeugen der Logdatei
+     * @throws IllegalArgumentException FilePath wurde wohl noch nicht gesetzt/oder ungültig gesetzt
+     */
+    public LoggerFactory() throws IOException, IllegalArgumentException
+    {
+        this(LoggerFactory.filePattern);
     }
 
     /**
