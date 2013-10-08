@@ -32,6 +32,9 @@ public abstract class AbstractTeil implements Teil {
     		s.append(",");
     		s.append(zahlen[i]);
     	}
+    	if(name !="Antenne"){
+    		s.append(",");
+    	}
     	
         return s.toString();
     }

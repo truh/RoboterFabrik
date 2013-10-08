@@ -9,6 +9,6 @@ public class Greifer extends AbstractTeil{
 	 * Gibt den SuperKonstruktor einen Namen
 	 */
 	public Greifer() {
-		super("Greifen");
+		super("Greifer");
 	}
 }

@@ -46,6 +46,8 @@ public class SpielzeugRoboter implements Stringifyable {
 	 */
 	public String toCSV() {
 		StringBuilder s = new StringBuilder();
+		s.append("Threadee-ID"+id+",");
+		s.append("Mitarbeiter-ID"+mitarbeiterId+",");
     	s.append(auge1.toCSV());
     	s.append(auge2.toCSV());
     	s.append(rumpf.toCSV());
@@ -64,7 +66,7 @@ public class SpielzeugRoboter implements Stringifyable {
     @Override
     public void fromCSV(String csv){
     	String[] items = csv.replaceAll("Threadee-ID","").replaceAll("Mitarbeiter-ID","").replaceAll("Auge,","").replaceAll("Arm,","").replaceAll("Rumpf,","").replaceAll("Kettenantrieb,","").replaceAll("Greifer,","").replaceAll("Antenne,","").split(",");
-    	int[] zahlen= new int[162];
+    	int[] zahlen= new int[182];
     	int[] ein = new int[20];
     	for(int i = 0;i<zahlen.length;i++){
     		zahlen[i]=Integer.parseInt(items[i]);

@@ -63,7 +63,6 @@ public class Fabrik {
 		kundenPool = new ThreadPoolExecutor(1, 1, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(1));
         kundenPool.execute(new Kunde(lagerMitarbeiter));
         
-        logger.log(null);
     }
 }
 	

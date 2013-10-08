@@ -2,11 +2,16 @@ package tgm.sew.roboterfabrik;
 
 import static org.junit.Assert.*;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ArmTest {
-	private Arm arm = new Arm();
-
+	private Arm arm;
+	
+	@BeforeClass
+	public void armTest(){
+		arm = new Arm();
+	}
 	@Test
 	public void testToCSV() {
 		int[] set = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
