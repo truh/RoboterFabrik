@@ -114,7 +114,6 @@ public class MontageMitarbeiter implements Mitarbeiter {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				logger.log(null);
 			}else{
 				// Falls er alle Teile hat Sortiert er zahlen[] im jeweiligen Objekt und erstellt mit den sortieren Objekten den
 				// Threadee
