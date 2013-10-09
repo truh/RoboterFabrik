@@ -63,7 +63,7 @@ public class Fabrik {
 		kundenPool = new ThreadPoolExecutor(1, 1, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(1));
         kundenPool.execute(new Kunde(lagerMitarbeiter));
         
-        // Nach der Laufzeit werden die noch laufendenThreads noch 1 mal ausgefuehrt und dann beendet
+        // Nach der Laufzeit werden die noch laufendenThreads noch fertig ausgefuehrt und dann beendet
         lagerMitarbeiterPool.shutdown();
         montageMitarbeiterPool.shutdown();
         liferantenPool.shutdown();
