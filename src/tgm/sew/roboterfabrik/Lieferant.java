@@ -28,7 +28,7 @@ public class Lieferant implements Stoppable {
 	{
 	    while(!stop)
         {
-            switch (random.nextInt(8)) //0-7
+            switch (random.nextInt(11)) //0-10
             {   //es werden mehr Arme und Augen als Kettenantriebe und Rümpfe gebraucht
                 case 0:case 4: //Arm
                     Arm arm = new Arm();
@@ -48,6 +48,12 @@ public class Lieferant implements Stoppable {
                     break;
                 case 6:case 7://es besteht auch eine chance das nichts hergestellt wird
                     //do nothing
+                case 8:case 9:
+                    Greifer greifer = new Greifer();
+                    lagerMitarbeiter.einlagern(greifer);
+                case 10:
+                    Antenne antenne = new Antenne();
+                    lagerMitarbeiter.einlagern(antenne);
             }
 
             try
