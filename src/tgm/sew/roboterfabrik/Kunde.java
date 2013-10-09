@@ -1,5 +1,6 @@
 package tgm.sew.roboterfabrik;
 
+import java.util.Random;
 import java.util.logging.Logger;
 
 import tgm.sew.roboterfabrik.logging.LoggerFactory;
@@ -18,6 +19,8 @@ public class Kunde implements Stoppable {
 	
 	private Logger logger;
 
+    private Random random;
+
 	/**
 	 * @param lagerMitarbeiter LagerMitarbeiter an den Bestellungen gestellt werden sollen
 	 */
@@ -26,6 +29,7 @@ public class Kunde implements Stoppable {
         logger = new LoggerFactory().getLogger(Kunde.class);
         this.lagerMitarbeiter = lagerMitarbeiter;
         this.stop = false;
+        this.random = new Random();
 	}
 
 	/**
@@ -43,7 +47,7 @@ public class Kunde implements Stoppable {
 	public void run()
 	{
         try {
-            Thread.sleep(500);
+            Thread.sleep(random.nextInt(250) + 250);
         } catch (InterruptedException e) {
             stop();
         }
@@ -56,7 +60,7 @@ public class Kunde implements Stoppable {
 				logger.log(Level.INFO,"Kunde hat Roboter erhalten");
 			}
 			try {
-				Thread.sleep(500);
+				Thread.sleep(random.nextInt(250) + 250);
 			} catch (InterruptedException e) {
 				stop();
 			}

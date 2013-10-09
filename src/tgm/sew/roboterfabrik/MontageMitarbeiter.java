@@ -1,6 +1,7 @@
 package tgm.sew.roboterfabrik;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import tgm.sew.roboterfabrik.logging.LoggerFactory;
@@ -15,6 +16,8 @@ public class MontageMitarbeiter implements Mitarbeiter {
 	private boolean stop;
 
 	private Logger logger;
+
+    private Random random;
 	
 	/**
 	 * 
@@ -32,7 +35,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 		} catch (IllegalArgumentException e1) {
 			e1.printStackTrace();
 		}
-
+        this.random = new Random();
 	}
 	
 	/**
@@ -60,7 +63,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 
         try
         {
-            Thread.sleep(1000);
+            Thread.sleep(random.nextInt(500) + 500);
         } catch (InterruptedException e)
         {
             stop();
@@ -120,7 +123,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
                 }
                 logger.info(sb.toString());
 				try {
-					Thread.sleep(500);
+					Thread.sleep(random.nextInt(250) + 250);
 				} catch (InterruptedException e) {
 					logger.throwing("MontageMitarbeiter", "run", e);
 				}

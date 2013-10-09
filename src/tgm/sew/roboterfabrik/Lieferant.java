@@ -85,7 +85,7 @@ public class Lieferant implements Stoppable {
 
             try
             {
-                Thread.sleep(random.nextInt(500) + 250);
+                Thread.sleep(random.nextInt(100));
             } catch (InterruptedException e)
             {
                 stop();

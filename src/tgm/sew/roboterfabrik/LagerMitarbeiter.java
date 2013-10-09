@@ -47,7 +47,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
      * @param type Typ des Artikels
      * @return Artikel oder null
      */
-    public Stringifyable anfrage(Class<? extends Stringifyable> type) {
+    public synchronized Stringifyable anfrage(Class<? extends Stringifyable> type) {
         logger.entering("LagerMitarbeiter", "anfrage", type);
         Stringifyable item = null;
 
@@ -93,7 +93,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
      *      scheiterungs Gründe währen wenn die buffer Queue voll ist oder
      *      der LagerMitarbeiter gestopt wurde.
      */
-	public boolean einlagern(Stringifyable item) {
+	public synchronized boolean einlagern(Stringifyable item) {
         if(this.stop){
             return false;
         }
@@ -148,7 +148,14 @@ public class LagerMitarbeiter implements Mitarbeiter {
                     lager.addThreadee((SpielzeugRoboter) item);
                 }
                 logger.log(Level.INFO, "Artikel wurde ins Lager gelegt", item.toCSV());
-            }
+            } else
+                try
+                {
+                    Thread.sleep(50);
+                } catch (InterruptedException e)
+                {
+                    stop();
+                }
         }
 	}
 
