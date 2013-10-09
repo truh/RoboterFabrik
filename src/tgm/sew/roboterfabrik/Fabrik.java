@@ -9,19 +9,18 @@ import tgm.sew.roboterfabrik.logging.LoggerFactory;
 
 public class Fabrik {
 
-	private ThreadPoolExecutor montageMitarbeiterPool;
-	
-	private ThreadPoolExecutor lagerMitarbeiterPool;
-	
-	private ThreadPoolExecutor kundenPool;
-
-	private ThreadPoolExecutor liferantenPool;
+    private LagerMitarbeiter [] lagerMitarbeiters;
+    private MontageMitarbeiter [] montageMitarbeiters;
+    private Lieferant [] lieferants;
+    private Kunde [] kundes;
 
 	private Sekretariat sekretariat;
 
 	private Lager lager;
 
 	private Logger logger;
+
+    private int laufzeit;
 	
 	/**
 	 * Hier werden die ThreadPools verwaltet
@@ -31,45 +30,78 @@ public class Fabrik {
 	 * @param filePfad Der Filepath fuer den lagermitarbeiter
 	 */
 	public Fabrik(int laufzeit, int numLieferanten, int numMonteure, String filePfad) {
+        logger = new LoggerFactory().getLogger(Fabrik.class);
+        logger.info("Fabrik wird geoeffnet.");
+
+        this.laufzeit = laufzeit;
+
         this.sekretariat = new Sekretariat();
-        try {
-			this.logger = new LoggerFactory().getLogger(FileQueue.class);
-		} catch (IllegalArgumentException e1) {
-			e1.printStackTrace();
-		}
-        //LagerMitarbeiterThreadPools und darin LagerMitarbeiterThreads erzeugen
-        LagerMitarbeiter lagerMitarbeiter = new LagerMitarbeiter(sekretariat.getUniqueID(), filePfad);
-        lagerMitarbeiterPool = new ThreadPoolExecutor(0,1, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(1));
-        lagerMitarbeiterPool.execute(lagerMitarbeiter);
 
-        //MontageMitarbeiterThreadPool und darin MontageMitarbeiterThreads erzeugen
-		montageMitarbeiterPool = new ThreadPoolExecutor(0, numMonteure, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(numMonteure));
+        //LagerMitarbeiter
+        lagerMitarbeiters = new LagerMitarbeiter[1];
+        for(int i=0; i<1; i++){
+            lagerMitarbeiters[i] = new LagerMitarbeiter(sekretariat.getUniqueMitarbeiterID(), filePfad);
+            new Thread(lagerMitarbeiters[i]).start();
+        }
+
+        //MontageMitarbeiter
+        montageMitarbeiters = new MontageMitarbeiter[numMonteure];
         for(int i=0; i<numMonteure; i++){
-            montageMitarbeiterPool.execute(new MontageMitarbeiter(sekretariat.getUniqueMitarbeiterID(),sekretariat,lagerMitarbeiter));
+            montageMitarbeiters[i] = new MontageMitarbeiter(sekretariat.getUniqueMitarbeiterID(), sekretariat, lagerMitarbeiters[0]);
+            new Thread(montageMitarbeiters[1]).start();
         }
 
-        //LieferantenPool und darin LieferantenThreads erzeugen
-		liferantenPool = new ThreadPoolExecutor( 0, numLieferanten, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(numLieferanten));
+        //Lieferanten
+        lieferants = new Lieferant[numLieferanten];
         for(int i=0; i<numLieferanten; i++){
-            liferantenPool.execute(new Lieferant(lagerMitarbeiter));
+            lieferants[i] = new Lieferant(lagerMitarbeiters[0]);
+            new Thread(lieferants[i]).start();
         }
 
-        //KundenPool und darin KundenThreads erzeugen
-		kundenPool = new ThreadPoolExecutor(0, 1, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(1));
-        kundenPool.execute(new Kunde(lagerMitarbeiter));
-
-        try
-        {
-            Thread.sleep(laufzeit);
-        } catch (InterruptedException e)
-        {
-            logger.throwing("Fabrik", "Fabrik", e);
+        kundes = new Kunde[1];
+        for(int i=0; i<1; i++){
+            kundes[i] = new Kunde(lagerMitarbeiters[0]);
+            new Thread(kundes[i]).start();
         }
-        // Nach der Laufzeit werden die noch laufendenThreads noch fertig ausgefuehrt und dann beendet
-        lagerMitarbeiterPool.shutdown();
-        montageMitarbeiterPool.shutdown();
-        liferantenPool.shutdown();
-        kundenPool.shutdown();    
+
+
+
+
+        //Thread zum zeitgesteuerten beenden der Mitarbeiter/Kunden/Lieferanten
+        Thread beender = new Thread(){
+            @Override
+            public void run()
+            {
+                super.run();
+                try
+                {
+                    Thread.sleep(Fabrik.this.laufzeit);
+                } catch (InterruptedException e)
+                {
+                    logger.throwing("Fabrik", "Fabrik", e);
+                }
+
+                for(Lieferant lieferant : lieferants) {
+                    lieferant.stop();
+                }
+
+                for(Kunde kunde : kundes) {
+                    kunde.stop();
+                }
+
+                for(MontageMitarbeiter montageMitarbeiter : montageMitarbeiters) {
+                    montageMitarbeiter.stop();
+                }
+
+                for(LagerMitarbeiter lagerMitarbeiter : lagerMitarbeiters) {
+                    lagerMitarbeiter.stop();
+                }
+            }
+        };
+
+        beender.start();
+
+        logger.info("Fabrik wurde geschlossen");
     }
 }
 	

@@ -28,7 +28,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 		this.lagerMitarbeiter=lagerMitarbeiter;
 		stop =false;
 		try {
-			this.logger = new LoggerFactory().getLogger(FileQueue.class);
+			this.logger = new LoggerFactory().getLogger(MontageMitarbeiter.class);
 		} catch (IllegalArgumentException e1) {
 			e1.printStackTrace();
 		}
@@ -81,26 +81,46 @@ public class MontageMitarbeiter implements Mitarbeiter {
 			antenne=(Antenne)lagerMitarbeiter.anfrage(Antenne.class);
 			// Falls Montagemitarbeiter ein Objekt nicht erhaelt legt gibt er alle seine Teile zurueck
 			if((auge1 == null)||(auge2 == null)||(arm1 == null)||(arm2==null)||(rumpf==null)||(kettenantrieb==null)||(greifer1==null)||(greifer2==null)||(antenne==null)) {
-				if(arm1 != null)
+				StringBuilder sb = new StringBuilder("mID:"+ getId() +" Der Versuch einen Threadee zu bauen schlug fehl, folgende Teile wurden zurueck gegeben: ");
+                if(arm1 != null){
                     lagerMitarbeiter.einlagern(arm1);
-                if(arm2 != null)
+                    sb.append("Arm 1 ");
+                }
+                if(arm2 != null){
                     lagerMitarbeiter.einlagern(arm2);
-                if(auge1 != null)
+                    sb.append("Arm 2 ");
+                }
+                if(auge1 != null){
                     lagerMitarbeiter.einlagern(auge1);
-                if(auge2 != null)
+                    sb.append("Auge 1 ");
+                }
+                if(auge2 != null){
                     lagerMitarbeiter.einlagern(auge2);
-                if(rumpf != null)
+                    sb.append("Auge 2 ");
+                }
+                if(rumpf != null){
                     lagerMitarbeiter.einlagern(rumpf);
-                if(kettenantrieb != null)
+                    sb.append("Rumpf ");
+                }
+                if(kettenantrieb != null){
                     lagerMitarbeiter.einlagern(kettenantrieb);
-                if(greifer1 != null)
+                    sb.append("KettenAntrieb ");
+                }
+                if(greifer1 != null){
                     lagerMitarbeiter.einlagern(greifer1);
-                if(greifer2 != null)
+                    sb.append("Greifer 1 ");
+                }
+                if(greifer2 != null){
                     lagerMitarbeiter.einlagern(greifer2);
-                if(antenne != null)
+                    sb.append("Greifer 2 ");
+                }
+                if(antenne != null){
                     lagerMitarbeiter.einlagern(antenne);
+                    sb.append("Antenne ");
+                }
+                logger.info(sb.toString());
 				try {
-					Thread.sleep(50);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					logger.throwing("MontageMitarbeiter", "run", e);
 				}
@@ -155,7 +175,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 				//Einlagern des Roboters
                 lagerMitarbeiter.einlagern(spielzeugRoboter);
 				try {
-					Thread.sleep(500);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					stop();
 				}

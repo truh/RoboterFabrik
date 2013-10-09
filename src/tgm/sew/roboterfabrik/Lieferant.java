@@ -81,7 +81,7 @@ public class Lieferant implements Stoppable {
                 lagerMitarbeiter.einlagern(antenne);
                 item = "Antenne";
             }
-            logger.info(item + " wurde geliefert");
+            logger.info(item + " wurde geliefert" + this.toString());
 
             try
             {
