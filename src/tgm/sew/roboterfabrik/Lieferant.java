@@ -32,7 +32,15 @@ public class Lieferant implements Stoppable {
      */
 	public void run()
 	{
-	    while(!stop)
+        //bisserl schlafen um den LagerMitarbeiter eine Chance zu geben
+        try
+        {
+            Thread.sleep(300);
+        } catch (InterruptedException e)
+        {
+            stop();
+        }
+        while(!stop)
         {
             String item = "";
             switch (random.nextInt(11)) //0-10
@@ -79,7 +87,7 @@ public class Lieferant implements Stoppable {
                 Thread.sleep(random.nextInt(500) + 250);
             } catch (InterruptedException e)
             {
-                stop = true;
+                stop();
             }
         }
 	}
