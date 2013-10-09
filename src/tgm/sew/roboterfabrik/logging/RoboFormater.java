@@ -20,8 +20,30 @@ public class RoboFormater
     @Override
     public String format(LogRecord record)
     {   //Normalerweise hat eine Logger einen Namen wie "package.class" ich will nur die class ausgeben
-        String [] lP = record.getLoggerName().split(".");
-        String shortLoggerName = lP.length <= 0 ? "/" : record.getLoggerName().split(".")[lP.length -1];
-        return "[" + record.getLevel() + "|" + shortLoggerName + "] " + record.getMessage() + System.getProperty("line.separator");
+        String loggerName = record.getLoggerName();
+        String [] lP = loggerName.split("\\.");
+        String shortLoggerName = lP.length <= 0 ? "/" : lP[lP.length -1];
+
+        //StringBuilder zum zusammenstellen der Nachricht
+        StringBuilder sb = new StringBuilder();
+
+        //Prefix der Nachricht wird hinzugefuegt
+        sb.append("[" + record.getLevel() + "|" + shortLoggerName + "] " + record.getMessage());
+        sb.append("; ");
+
+        //moegliche Parameter anhängen
+        if(record.getParameters() != null)
+            for(Object obj : record.getParameters()) {
+                sb.append(obj);
+                sb.append("; ");
+            }
+
+        //moegliche Exceptions ausgeben
+        if(record.getThrown() != null){
+            sb.append(record.getThrown().getStackTrace().toString());
+            sb.append("; ");
+        }
+
+        return sb.toString() + System.getProperty("line.separator");
     }
 }

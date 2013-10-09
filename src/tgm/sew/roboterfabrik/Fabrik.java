@@ -57,7 +57,14 @@ public class Fabrik {
         //KundenPool und darin KundenThreads erzeugen
 		kundenPool = new ThreadPoolExecutor(0, 1, laufzeit, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(1));
         kundenPool.execute(new Kunde(lagerMitarbeiter));
-        
+
+        try
+        {
+            Thread.sleep(laufzeit);
+        } catch (InterruptedException e)
+        {
+            logger.throwing("Fabrik", "Fabrik", e);
+        }
         // Nach der Laufzeit werden die noch laufendenThreads noch fertig ausgefuehrt und dann beendet
         lagerMitarbeiterPool.shutdown();
         montageMitarbeiterPool.shutdown();

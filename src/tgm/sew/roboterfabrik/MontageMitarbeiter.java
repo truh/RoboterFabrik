@@ -8,8 +8,6 @@ import tgm.sew.roboterfabrik.logging.LoggerFactory;
 public class MontageMitarbeiter implements Mitarbeiter {
 	private int id;
 
-
-
 	private Sekretariat sekretariat;
 
 	private LagerMitarbeiter lagerMitarbeiter;
@@ -59,7 +57,15 @@ public class MontageMitarbeiter implements Mitarbeiter {
         Greifer greifer2;
         Antenne antenne;
 
-		while(!stop){
+        try
+        {
+            Thread.sleep(1000);
+        } catch (InterruptedException e)
+        {
+            this.stop = true;
+        }
+
+        while(!stop){
 			// Die Objekte fuer den Roboter werden von dem lagermitarbeiter angefordert
 			auge1=(Auge)lagerMitarbeiter.anfrage(Auge.class);
 			auge2=(Auge)lagerMitarbeiter.anfrage(Auge.class);
@@ -144,7 +150,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 				//Einlagern des Roboters
                 lagerMitarbeiter.einlagern(spielzeugRoboter);
 				try {
-					Thread.sleep(50);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
