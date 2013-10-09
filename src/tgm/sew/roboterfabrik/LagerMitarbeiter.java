@@ -66,6 +66,14 @@ public class LagerMitarbeiter implements Mitarbeiter {
         {
             item = lager.pollRumpf();
         } else
+        if(type == Greifer.class)
+        {
+            item = lager.pollGreifer();
+        } else
+        if(type == Antenne.class)
+        {
+            item = lager.pollAntenne();
+        } else
         if(type == SpielzeugRoboter.class)
         {
             item = lager.pollThreadee();
@@ -118,6 +126,14 @@ public class LagerMitarbeiter implements Mitarbeiter {
                 if(item instanceof Rumpf)
                 {
                     lager.addRumpf((Rumpf) item);
+                } else
+                if(item instanceof Greifer)
+                {
+                    lager.addGreifer((Greifer) item);
+                } else
+                if(item instanceof Antenne)
+                {
+                    lager.addAntenne((Antenne) item);
                 } else
                 if(item instanceof SpielzeugRoboter)
                 {
