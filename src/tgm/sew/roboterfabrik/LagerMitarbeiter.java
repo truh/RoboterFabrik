@@ -47,7 +47,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
      * @param type Typ des Artikels
      * @return Artikel oder null
      */
-    public synchronized Stringifyable anfrage(Class<? extends Stringifyable> type) {
+    public Stringifyable anfrage(Class<? extends Stringifyable> type) {
         logger.entering("LagerMitarbeiter", "anfrage", type);
         Stringifyable item = null;
 
