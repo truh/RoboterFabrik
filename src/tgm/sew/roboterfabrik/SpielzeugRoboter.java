@@ -48,14 +48,14 @@ public class SpielzeugRoboter implements Stringifyable {
 		StringBuilder s = new StringBuilder();
 		s.append("Threadee-ID"+id+",");
 		s.append("Mitarbeiter-ID"+mitarbeiterId+",");
-    	s.append(auge1.toCSV());
-    	s.append(auge2.toCSV());
-    	s.append(rumpf.toCSV());
-    	s.append(kettenantrieb.toCSV());
-    	s.append(arm1.toCSV());
-    	s.append(arm2.toCSV());
-    	s.append(greifer1.toCSV());
-    	s.append(greifer2.toCSV());
+    	s.append(auge1.toCSV()+",");
+    	s.append(auge2.toCSV()+",");
+    	s.append(rumpf.toCSV()+",");
+    	s.append(kettenantrieb.toCSV()+",");
+    	s.append(arm1.toCSV()+",");
+    	s.append(arm2.toCSV()+",");
+    	s.append(greifer1.toCSV()+",");
+    	s.append(greifer2.toCSV()+",");
     	s.append(antenne.toCSV());
     	
         return s.toString();

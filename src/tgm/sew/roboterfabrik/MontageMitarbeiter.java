@@ -105,7 +105,6 @@ public class MontageMitarbeiter implements Mitarbeiter {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				logger.info(""); //Todo besserer Log
 			}else{
                 int[] auge1zahlen ;
                 auge1zahlen = auge1.getZahlen();
