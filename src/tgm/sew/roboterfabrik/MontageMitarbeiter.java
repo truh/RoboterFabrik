@@ -1,10 +1,9 @@
 package tgm.sew.roboterfabrik;
 
-import java.io.IOException;
+import tgm.sew.roboterfabrik.logging.LoggerFactory;
+
 import java.util.Random;
 import java.util.logging.Logger;
-
-import tgm.sew.roboterfabrik.logging.LoggerFactory;
 
 public class MontageMitarbeiter implements Mitarbeiter {
 	private int id;

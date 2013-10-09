@@ -5,8 +5,6 @@ import tgm.sew.roboterfabrik.logging.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class Simulation {

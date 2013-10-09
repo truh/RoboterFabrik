@@ -3,7 +3,6 @@ package tgm.sew.roboterfabrik;
 import tgm.sew.roboterfabrik.logging.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;

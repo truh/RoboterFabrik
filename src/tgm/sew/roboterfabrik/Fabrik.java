@@ -1,8 +1,8 @@
 package tgm.sew.roboterfabrik;
 
-import java.util.logging.Logger;
-
 import tgm.sew.roboterfabrik.logging.LoggerFactory;
+
+import java.util.logging.Logger;
 
 public class Fabrik {
 
