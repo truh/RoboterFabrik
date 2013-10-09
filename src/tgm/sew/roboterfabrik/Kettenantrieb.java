@@ -9,6 +9,6 @@ public class Kettenantrieb extends AbstractTeil{
 	 * Gibt den SuperKonstruktor einen Namen
 	 */
 	public Kettenantrieb() {
-		super("Kettenatrieb");
+		super("Kettenantrieb");
 	}
 }
