@@ -8,30 +8,11 @@ import tgm.sew.roboterfabrik.logging.LoggerFactory;
 public class MontageMitarbeiter implements Mitarbeiter {
 	private int id;
 
-	private Auge auge1;
-	private Auge auge2;
 
-	private Rumpf rumpf;
-
-	private Kettenantrieb kettenantrieb;
-
-	private Arm arm1;
-	private Arm arm2;
-	
-	private Greifer greifer1;
-	private Greifer greifer2;
-	
-	private Antenne antenne;
 
 	private Sekretariat sekretariat;
 
 	private LagerMitarbeiter lagerMitarbeiter;
-	
-	private int mitarbeiterId;
-	
-	private int speicher;
-	
-	private SpielzeugRoboter spielzeugRoboter;
 	
 	private boolean stop;
 
@@ -68,17 +49,27 @@ public class MontageMitarbeiter implements Mitarbeiter {
 	 * Falls nicht alle notwendigen Teile vorhanden sind gibt der Montagemitarbeiter die Teile zurueck
 	 */
 	public void run(){
+        Auge auge1;
+        Auge auge2;
+        Rumpf rumpf;
+        Kettenantrieb kettenantrieb;
+        Arm arm1;
+        Arm arm2;
+        Greifer greifer1;
+        Greifer greifer2;
+        Antenne antenne;
+
 		while(!stop){
 			// Die Objekte fuer den Roboter werden von dem lagermitarbeiter angefordert
-			this.auge1=(Auge)lagerMitarbeiter.anfrage(Auge.class);
-			this.auge2=(Auge)lagerMitarbeiter.anfrage(Auge.class);
-			this.arm1=(Arm)lagerMitarbeiter.anfrage(Arm.class);
-			this.arm2=(Arm)lagerMitarbeiter.anfrage(Arm.class);
-			this.rumpf=(Rumpf)lagerMitarbeiter.anfrage(Rumpf.class);
-			this.kettenantrieb=(Kettenantrieb)lagerMitarbeiter.anfrage(Kettenantrieb.class);
-			this.greifer1=(Greifer)lagerMitarbeiter.anfrage(Greifer.class);
-			this.greifer2=(Greifer)lagerMitarbeiter.anfrage(Greifer.class);
-			this.antenne=(Antenne)lagerMitarbeiter.anfrage(Antenne.class);
+			auge1=(Auge)lagerMitarbeiter.anfrage(Auge.class);
+			auge2=(Auge)lagerMitarbeiter.anfrage(Auge.class);
+			arm1=(Arm)lagerMitarbeiter.anfrage(Arm.class);
+			arm2=(Arm)lagerMitarbeiter.anfrage(Arm.class);
+			rumpf=(Rumpf)lagerMitarbeiter.anfrage(Rumpf.class);
+			kettenantrieb=(Kettenantrieb)lagerMitarbeiter.anfrage(Kettenantrieb.class);
+			greifer1=(Greifer)lagerMitarbeiter.anfrage(Greifer.class);
+			greifer2=(Greifer)lagerMitarbeiter.anfrage(Greifer.class);
+			antenne=(Antenne)lagerMitarbeiter.anfrage(Antenne.class);
 			// Falls Montagemitarbeiter ein Objekt nicht erhaelt legt gibt er alle seine Teile zurueck
 			if((auge1 == null)||(auge2 == null)||(arm1 == null)||(arm2==null)||(rumpf==null)||(kettenantrieb==null)||(greifer1==null)||(greifer2==null)||(antenne==null)) {
 				if(arm1 != null)
@@ -102,56 +93,59 @@ public class MontageMitarbeiter implements Mitarbeiter {
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					logger.throwing("MontageMitarbeiter", "run", e);
 				}
 			}else{
-                int[] auge1zahlen ;
-                auge1zahlen = auge1.getZahlen();
-                int[] auge2zahlen ;
-                auge2zahlen = auge2.getZahlen();
-                int[] arm1zahlen ;
-                arm1zahlen = arm1.getZahlen();
-                int[] arm2zahlen ;
-                arm2zahlen = arm2.getZahlen();
-                int[] rumpfzahlen ;
-                rumpfzahlen = rumpf.getZahlen();
-                int[] kettenantriebzahlen ;
-                kettenantriebzahlen = kettenantrieb.getZahlen();
-                int[] greifer1zahlen ;
-                greifer1zahlen = greifer1.getZahlen();
-                int[] greifer2zahlen ;
-                greifer2zahlen = greifer2.getZahlen();
-                int[] antennezahlen ;
-                antennezahlen = antenne.getZahlen();
-				// Falls er alle Teile hat Sortiert er zahlen[] im jeweiligen Objekt und erstellt mit den sortieren Objekten den
-				// Threadee
-				auge1zahlen=sortieren(auge1zahlen);
-				auge2zahlen=sortieren(auge2zahlen);
-				arm1zahlen=sortieren(arm1zahlen);
-				arm2zahlen=sortieren(arm2zahlen);
-				rumpfzahlen=sortieren(rumpfzahlen);
-				kettenantriebzahlen=sortieren(kettenantriebzahlen);
-				greifer1zahlen=sortieren(greifer1zahlen);
-				greifer2zahlen=sortieren(greifer2zahlen);
-				antennezahlen=sortieren(antennezahlen);
+                //Sortiere die Zahlen
+                int[] auge1zahlen  = auge1.getZahlen();
+                auge1zahlen = sortieren(auge1zahlen);
+                int[] auge2zahlen  = auge2.getZahlen();
+                auge2zahlen = sortieren(auge2zahlen);
+
+                int[] arm1zahlen = arm1.getZahlen();
+                arm1zahlen = sortieren(arm1zahlen);
+                int[] arm2zahlen = arm2.getZahlen();
+                arm2zahlen = sortieren(arm2zahlen);
+
+                int[] rumpfzahlen = rumpf.getZahlen();
+                rumpfzahlen = sortieren(rumpfzahlen);
+
+                int[] kettenantriebzahlen = kettenantrieb.getZahlen();
+                kettenantriebzahlen = sortieren(kettenantriebzahlen);
+
+                int[] greifer1zahlen = greifer1.getZahlen();
+                greifer1zahlen = sortieren(greifer1zahlen);
+                int[] greifer2zahlen = greifer2.getZahlen();
+                greifer2zahlen = sortieren(greifer2zahlen);
+
+                int[] antennezahlen = antenne.getZahlen();
+                antennezahlen = sortieren(antennezahlen);
+
+                //Sortierte Zahlen an die Bauteile zurückgeben
 				auge1.setZahlen(auge1zahlen);
 				auge2.setZahlen(auge2zahlen);
 				arm1.setZahlen(arm1zahlen);
 				arm2.setZahlen(arm2zahlen);
 				rumpf.setZahlen(rumpfzahlen);
 				greifer1.setZahlen(greifer1zahlen);
-				greifer2.setZahlen(greifer1zahlen);
-				antenne.setZahlen(greifer1zahlen);
+				greifer2.setZahlen(greifer2zahlen);
+				antenne.setZahlen(antennezahlen);
 				kettenantrieb.setZahlen(kettenantriebzahlen);
-				id = sekretariat.getUniqueID();
-				mitarbeiterId = sekretariat.getUniqueMitarbeiterID();
-				spielzeugRoboter = new SpielzeugRoboter(id, mitarbeiterId ,auge1, auge2,rumpf,kettenantrieb,arm1, arm2,greifer1,greifer2,antenne);
-				lagerMitarbeiter.einlagern(spielzeugRoboter);
+
+				SpielzeugRoboter spielzeugRoboter = new SpielzeugRoboter(sekretariat.getUniqueID(), getId(),
+                        auge1, auge2,
+                        rumpf,
+                        kettenantrieb,
+                        arm1, arm2,
+                        greifer1, greifer2,
+                        antenne
+                );
+
+				//Einlagern des Roboters
+                lagerMitarbeiter.einlagern(spielzeugRoboter);
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -160,7 +154,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 
     @Override
     public int getId() {
-        return mitarbeiterId; 
+        return id;
     }
 
     @Override
