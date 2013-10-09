@@ -1,8 +1,5 @@
 package tgm.sew.roboterfabrik;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import tgm.sew.roboterfabrik.logging.LoggerFactory;
