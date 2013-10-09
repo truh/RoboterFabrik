@@ -13,6 +13,8 @@ public class Lager
 	private Queue<Rumpf> ruempfe;
 	private Queue<Arm> arme;
 	private Queue<Kettenantrieb> kettenAntriebe;
+    private Queue<Greifer> greifer;
+    private Queue<Antenne> antennen;
 	private Queue<SpielzeugRoboter> threadees;
 
     private Logger logger;
@@ -28,6 +30,8 @@ public class Lager
         this.arme = new FileQueue<Arm>(filePfad + File.separator, Arm.class);
         this.ruempfe = new FileQueue<Rumpf>(filePfad + File.separator, Rumpf.class);
         this.kettenAntriebe = new FileQueue<Kettenantrieb>(filePfad + File.separator, Kettenantrieb.class);
+        this.greifer = new FileQueue<Greifer>(filePfad + File.separator, Greifer.class);
+        this.antennen = new FileQueue<Antenne>(filePfad + File.separator, Antenne.class);
         this.threadees = new FileQueue<SpielzeugRoboter>(filePfad + File.separator, SpielzeugRoboter.class);
     }
 
@@ -62,14 +66,34 @@ public class Lager
 	}
 
     /**
-     * Einen Kettenantrieb zum Lager hinzufügen
+     * Einen Greifer zum Lager hinzufügen
      *
      * @param kettenAntrieb KettenAntrieb welcher hinzugefügt werden soll
      * @return true wenn hinzufügen möglich war
      */
-	public boolean addKettenantrieb(Kettenantrieb kettenAntrieb) {
-		return this.kettenAntriebe.offer(kettenAntrieb);
-	}
+    public boolean addKettenantrieb(Kettenantrieb kettenAntrieb) {
+        return this.kettenAntriebe.offer(kettenAntrieb);
+    }
+
+    /**
+     * Eine Antenne zum Lager hinzufügen
+     *
+     * @param greifer KettenAntrieb welcher hinzugefügt werden soll
+     * @return true wenn hinzufügen möglich war
+     */
+    public boolean addGreifer(Greifer greifer) {
+        return this.greifer.offer(greifer);
+    }
+
+    /**
+     * Einen Kettenantrieb zum Lager hinzufügen
+     *
+     * @param antenne KettenAntrieb welcher hinzugefügt werden soll
+     * @return true wenn hinzufügen möglich war
+     */
+    public boolean addAntenne(Antenne antenne) {
+        return this.antennen.offer(antenne);
+    }
 
     /**
      * Einen Threadee zum Lager hinzufügen
@@ -113,9 +137,26 @@ public class Lager
      *
      * @return Entnommener KettenAntrieb oder null wenn keiner vorhanden war
      */
-	public Kettenantrieb pollKettenantrieb() {
-		return this.kettenAntriebe.poll();
-	}
+    public Kettenantrieb pollKettenantrieb() {
+        return this.kettenAntriebe.poll();
+    }
+
+    /**
+     * Einen Greifer dem Lager entnehmen
+     *
+     * @return Entnommener Greifer oder null wenn keiner vorhanden war
+     */
+    public Greifer pollGreifer() {
+        return this.greifer.poll();
+    }
+    /**
+     * Einen Antenne dem Lager entnehmen
+     *
+     * @return Entnommener Antenne oder null wenn keiner vorhanden war
+     */
+    public Antenne pollAntenne() {
+        return this.antennen.poll();
+    }
 
     /**
      * Einen SpielzeugRoboter dem Lager entnehmen
