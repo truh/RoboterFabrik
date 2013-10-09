@@ -87,7 +87,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
                     lagerMitarbeiter.einlagern(arm2);
                 if(auge1 != null)
                     lagerMitarbeiter.einlagern(auge1);
-                if(arm2 != null)
+                if(auge2 != null)
                     lagerMitarbeiter.einlagern(auge2);
                 if(rumpf != null)
                     lagerMitarbeiter.einlagern(rumpf);
