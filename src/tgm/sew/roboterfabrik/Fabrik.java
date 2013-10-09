@@ -62,8 +62,7 @@ public class Fabrik {
         lagerMitarbeiterPool.shutdown();
         montageMitarbeiterPool.shutdown();
         liferantenPool.shutdown();
-        kundenPool.shutdown();
-        
+        kundenPool.shutdown();    
     }
 }
 	
