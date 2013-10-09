@@ -42,7 +42,7 @@ public class SpielzeugRoboter implements Stringifyable {
 
 
 	/**
-	 * Wandelt alles was in den Teilen ist in ein String
+	 * Wandelt alles was im Roboter ist in ein String
 	 */
 	public String toCSV() {
 		StringBuilder s = new StringBuilder();
