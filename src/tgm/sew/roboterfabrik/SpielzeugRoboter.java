@@ -1,4 +1,10 @@
 package tgm.sew.roboterfabrik;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import tgm.sew.roboterfabrik.logging.LoggerFactory;
+
 public class SpielzeugRoboter implements Stringifyable {
 	private static String TID_PREFIX= "Threadee-ID";
 
@@ -26,7 +32,10 @@ public class SpielzeugRoboter implements Stringifyable {
 
 	private Sekretariat sekretariat;
 
+	private Logger logger;
+
 	public SpielzeugRoboter(int id, int mitarbeiterId, Auge auge1, Auge auge2, Rumpf rumpf, Kettenantrieb kettenantrieb, Arm arm1, Arm arm2,Greifer greifer1,Greifer greifer2,Antenne antenne) {
+		this.logger = new LoggerFactory().getLogger(SpielzeugRoboter.class);
 		this.id = id;
 		this.mitarbeiterId = mitarbeiterId;
 		this.auge1 = auge1;
@@ -38,6 +47,7 @@ public class SpielzeugRoboter implements Stringifyable {
 		this.greifer1 = greifer1;
 		this.greifer2 = greifer2;
 		this.antenne = antenne;
+		logger.log(Level.INFO,"Threadee wurde erstellt");
 	}
 
 
