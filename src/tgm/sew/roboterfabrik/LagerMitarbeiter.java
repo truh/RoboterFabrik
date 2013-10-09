@@ -3,6 +3,7 @@ package tgm.sew.roboterfabrik;
 import tgm.sew.roboterfabrik.logging.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +38,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
             logger.log(Level.FINER, "LagerMitarbeiter#LagerMitarbeiter(int, String): Erzeugen des Lagers", e);
             e.printStackTrace();
         }
-        einlagernQueue = new ArrayBlockingQueue<Stringifyable>(50);
+        einlagernQueue = new ArrayBlockingQueue<Stringifyable>(256);
     }
 
     /**
@@ -88,10 +89,16 @@ public class LagerMitarbeiter implements Mitarbeiter {
      * Arbeitet asynchron, item wird erst zwischen gespeichert und später eingelagert
      *
      * @param item Artikel der eingeliefert werden soll
+     * @return einlagern erfolgreich?
+     *      scheiterungs Gründe währen wenn die buffer Queue voll ist oder
+     *      der LagerMitarbeiter gestopt wurde.
      */
-	public void einlagern(Stringifyable item) {
+	public boolean einlagern(Stringifyable item) {
+        if(this.stop){
+            return false;
+        }
         logger.entering("LagerMiterbeiter", "einlagern", item);
-        this.einlagernQueue.add(item);
+        return this.einlagernQueue.offer(item);
 	}
 
 	/**

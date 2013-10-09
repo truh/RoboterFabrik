@@ -69,10 +69,23 @@ public class FileQueue<E extends Stringifyable> extends AbstractQueue<E>
         LinkedList<E> elemente = new LinkedList<E>();
         while((line=br.readLine())!=null)
         {
-            E stringi = this.genericType.newInstance();
-            stringi.fromCSV(line);
-            if(null != stringi.toCSV()) {
-                elemente.add(stringi);
+            E element = null;
+            boolean success = false;
+
+            while(!success){
+                success = true;
+
+                try {
+                    element = this.genericType.newInstance();
+                }
+                catch (InstantiationException ie) {
+                    success = false;
+                }
+            }
+
+            element.fromCSV(line);
+            if(null != element.toCSV()) {
+                elemente.add(element);
             }
         }
 
