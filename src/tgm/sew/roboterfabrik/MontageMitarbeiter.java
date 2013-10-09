@@ -65,11 +65,11 @@ public class MontageMitarbeiter implements Mitarbeiter {
 	/**
 	 * Hier werden die zahlen in den Einzelnen Teilen sortiert und danach der Roboter erstellt und vom lagermitarbeiter ins Lager
 	 * gestellt
-	 * Falls nicht alle notwendigen Teile vorhanden sind gibt der Montagemitarbeiter die Teile zur�ck
+	 * Falls nicht alle notwendigen Teile vorhanden sind gibt der Montagemitarbeiter die Teile zurueck
 	 */
 	public void run(){
 		while(!stop){
-			// Die Objekte f�r den Roboter werden von dem lagermitarbeiter angefordert
+			// Die Objekte fuer den Roboter werden von dem lagermitarbeiter angefordert
 			this.auge1=(Auge)lagerMitarbeiter.anfrage(Auge.class);
 			this.auge2=(Auge)lagerMitarbeiter.anfrage(Auge.class);
 			this.arm1=(Arm)lagerMitarbeiter.anfrage(Arm.class);
@@ -79,35 +79,26 @@ public class MontageMitarbeiter implements Mitarbeiter {
 			this.greifer1=(Greifer)lagerMitarbeiter.anfrage(Greifer.class);
 			this.greifer2=(Greifer)lagerMitarbeiter.anfrage(Greifer.class);
 			this.antenne=(Antenne)lagerMitarbeiter.anfrage(Antenne.class);
-			int[] auge1zahlen ;
-			auge1zahlen = auge1.getZahlen();
-			int[] auge2zahlen ;
-			auge2zahlen = auge2.getZahlen();
-			int[] arm1zahlen ;
-			arm1zahlen = arm1.getZahlen();
-			int[] arm2zahlen ;
-			arm2zahlen = arm2.getZahlen();
-			int[] rumpfzahlen ;
-			rumpfzahlen = rumpf.getZahlen();
-			int[] kettenantriebzahlen ;
-			kettenantriebzahlen = kettenantrieb.getZahlen();
-			int[] greifer1zahlen ;
-			greifer1zahlen = greifer1.getZahlen();
-			int[] greifer2zahlen ;
-			greifer2zahlen = greifer2.getZahlen();
-			int[] antennezahlen ;
-			antennezahlen = antenne.getZahlen();
-			// Falls Montagemitarbeiter ein Objekt nicht erh�lt legt gibt er alle seine Teile zur�ck
-			if((auge1zahlen == null)||(auge2zahlen == null)||(arm1zahlen == null)||(arm2zahlen==null)||(rumpfzahlen==null)||(kettenantriebzahlen==null)||(greifer1zahlen==null)||(greifer2zahlen==null)||(antennezahlen==null)){
-				lagerMitarbeiter.einlagern(arm1);
-				lagerMitarbeiter.einlagern(arm2);
-				lagerMitarbeiter.einlagern(auge1);
-				lagerMitarbeiter.einlagern(auge2);
-				lagerMitarbeiter.einlagern(rumpf);
-				lagerMitarbeiter.einlagern(kettenantrieb);
-				lagerMitarbeiter.einlagern(greifer1);
-				lagerMitarbeiter.einlagern(greifer2);
-				lagerMitarbeiter.einlagern(antenne);
+			// Falls Montagemitarbeiter ein Objekt nicht erhaelt legt gibt er alle seine Teile zurueck
+			if((auge1 == null)||(auge2 == null)||(arm1 == null)||(arm2==null)||(rumpf==null)||(kettenantrieb==null)||(greifer1==null)||(greifer2==null)||(antenne==null)) {
+				if(arm1 != null)
+                    lagerMitarbeiter.einlagern(arm1);
+                if(arm2 != null)
+                    lagerMitarbeiter.einlagern(arm2);
+                if(auge1 != null)
+                    lagerMitarbeiter.einlagern(auge1);
+                if(arm2 != null)
+                    lagerMitarbeiter.einlagern(auge2);
+                if(rumpf != null)
+                    lagerMitarbeiter.einlagern(rumpf);
+                if(kettenantrieb != null)
+                    lagerMitarbeiter.einlagern(kettenantrieb);
+                if(greifer1 != null)
+                    lagerMitarbeiter.einlagern(greifer1);
+                if(greifer2 != null)
+                    lagerMitarbeiter.einlagern(greifer2);
+                if(antenne != null)
+                    lagerMitarbeiter.einlagern(antenne);
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
@@ -116,6 +107,24 @@ public class MontageMitarbeiter implements Mitarbeiter {
 				}
 				logger.log(null);
 			}else{
+                int[] auge1zahlen ;
+                auge1zahlen = auge1.getZahlen();
+                int[] auge2zahlen ;
+                auge2zahlen = auge2.getZahlen();
+                int[] arm1zahlen ;
+                arm1zahlen = arm1.getZahlen();
+                int[] arm2zahlen ;
+                arm2zahlen = arm2.getZahlen();
+                int[] rumpfzahlen ;
+                rumpfzahlen = rumpf.getZahlen();
+                int[] kettenantriebzahlen ;
+                kettenantriebzahlen = kettenantrieb.getZahlen();
+                int[] greifer1zahlen ;
+                greifer1zahlen = greifer1.getZahlen();
+                int[] greifer2zahlen ;
+                greifer2zahlen = greifer2.getZahlen();
+                int[] antennezahlen ;
+                antennezahlen = antenne.getZahlen();
 				// Falls er alle Teile hat Sortiert er zahlen[] im jeweiligen Objekt und erstellt mit den sortieren Objekten den
 				// Threadee
 				auge1zahlen=sortieren(auge1zahlen);
@@ -160,7 +169,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
         return sekretariat;
     }
     /**
-     * Sortiert die zahlen in zahlen[] von klein nach gro� und gibt dieses dann wieder aus
+     * Sortiert die zahlen in zahlen[] von klein nach gross und gibt dieses dann wieder aus
      * @param zahlen
      * @return das sortierte zahlen array
      */
