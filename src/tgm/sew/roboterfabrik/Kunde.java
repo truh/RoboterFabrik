@@ -51,7 +51,7 @@ public class Kunde implements Stoppable {
 		while(!stop){
 			spielzeugRoboter =(SpielzeugRoboter) lagerMitarbeiter.anfrage(SpielzeugRoboter.class);
 			if(spielzeugRoboter == null){
-				logger.log(Level.INFO,"Kunde erh�lt kein Roboter(Kein Roboter vorhanden)");
+				logger.log(Level.INFO,"Kunde erhaelt kein Roboter(Kein Roboter vorhanden)");
 			}else{
 				logger.log(Level.INFO,"Kunde hat Roboter erhalten");
 			}

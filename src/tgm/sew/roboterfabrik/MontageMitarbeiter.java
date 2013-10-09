@@ -66,7 +66,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
             stop();
         }
 
-        logger.info("MontageMitarbeiter:" + getId() + " beginnt seinen Tätigkeit");
+        logger.info("MontageMitarbeiter:" + getId() + " beginnt seinen Taetigkeit");
 
         while(!stop){
 			// Die Objekte fuer den Roboter werden von dem lagermitarbeiter angefordert
