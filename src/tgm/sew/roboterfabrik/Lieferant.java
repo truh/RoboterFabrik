@@ -17,7 +17,6 @@ public class Lieferant implements Stoppable {
         this.stop = false;
         this.random = new Random(); //sucht sich ohne Parameter einen Seed basierend auf der aktuellen Nanoskeunde aus
         logger = new LoggerFactory().getLogger(Lieferant.class);
-        logger.info("Lieferant wurde angestellt");
 	}
 
 	/**
@@ -25,6 +24,7 @@ public class Lieferant implements Stoppable {
 	 */
 	public void stop() {
         this.stop = true;
+        logger.info("Lieferant wurde gestoppt " + this.toString());
 	}
 
     /**
@@ -40,6 +40,7 @@ public class Lieferant implements Stoppable {
         {
             stop();
         }
+        logger.info("Ein Lieferant beginnt seinen Job");
         while(!stop)
         {
             String item = "";

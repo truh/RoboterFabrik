@@ -113,6 +113,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
      */
 	public void run()
 	{
+        logger.info("Ein LagerMitarbeiter:" + getId() + " beginnt seinen Job");
 	    while (!stop)
         {
             if(einlagernQueue.size() > 0)
@@ -146,7 +147,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
                 {
                     lager.addThreadee((SpielzeugRoboter) item);
                 }
-                logger.log(Level.INFO, "Artikel wurde ins Lager gelegt", item);
+                logger.log(Level.INFO, "Artikel wurde ins Lager gelegt", item.toCSV());
             }
         }
 	}
@@ -162,6 +163,6 @@ public class LagerMitarbeiter implements Mitarbeiter {
 
     @Override
     public Sekretariat getSekretariat() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 }

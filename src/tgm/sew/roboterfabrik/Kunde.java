@@ -1,4 +1,9 @@
 package tgm.sew.roboterfabrik;
+
+import tgm.sew.roboterfabrik.logging.LoggerFactory;
+
+import java.util.logging.Logger;
+
 /**
  * Kunden geben Bestellungen an den LagerMitarbeiter ab.
  */
@@ -10,11 +15,14 @@ public class Kunde implements Stoppable {
 	
 	private boolean stop;
 
+    private Logger logger;
+
 	/**
 	 * @param lagerMitarbeiter LagerMitarbeiter an den Bestellungen gestellt werden sollen
 	 */
 	public Kunde(LagerMitarbeiter lagerMitarbeiter) {
-			this.lagerMitarbeiter = lagerMitarbeiter;
+		this.lagerMitarbeiter = lagerMitarbeiter;
+        logger = new LoggerFactory().getLogger(Kunde.class);
 	}
 
 	/**
@@ -22,6 +30,7 @@ public class Kunde implements Stoppable {
 	 */
 	public void stop() {
 		stop = true;
+        logger.info("Ein Kunde geht nachhause " + this.toString());
 	}
 
 	/**
@@ -30,13 +39,18 @@ public class Kunde implements Stoppable {
 	 */
 	public void run()
 	{
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            stop();
+        }
+        logger.info("Ein Kunde beginnt seinen Einkauf " + this.toString());
 		while(!stop){
 			lagerMitarbeiter.anfrage(SpielzeugRoboter.class);
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				stop();
 			}
 		}
 	}

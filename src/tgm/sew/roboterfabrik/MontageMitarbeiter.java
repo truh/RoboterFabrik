@@ -40,6 +40,7 @@ public class MontageMitarbeiter implements Mitarbeiter {
 	 */
 	public void stop() {
 		stop = true;
+        logger.info("MontageMitarbeiter:" + getId() + " wurde gestoppt");
 	}
 	/**
 	 * Hier werden die zahlen in den Einzelnen Teilen sortiert und danach der Roboter erstellt und vom lagermitarbeiter ins Lager
@@ -62,8 +63,10 @@ public class MontageMitarbeiter implements Mitarbeiter {
             Thread.sleep(1000);
         } catch (InterruptedException e)
         {
-            this.stop = true;
+            stop();
         }
+
+        logger.info("MontageMitarbeiter:" + getId() + " beginnt seinen Tätigkeit");
 
         while(!stop){
 			// Die Objekte fuer den Roboter werden von dem lagermitarbeiter angefordert
@@ -147,12 +150,14 @@ public class MontageMitarbeiter implements Mitarbeiter {
                         antenne
                 );
 
+                logger.info("MontageMitarbeiter:"+ getId() +" gibt Threadee" + spielzeugRoboter.toCSV() + " an LagerMitarbeiter weiter");
+
 				//Einlagern des Roboters
                 lagerMitarbeiter.einlagern(spielzeugRoboter);
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					stop();
 				}
 			}
 		}
