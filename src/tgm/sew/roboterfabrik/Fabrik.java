@@ -13,8 +13,6 @@ public class Fabrik {
 
 	private Sekretariat sekretariat;
 
-	private Lager lager;
-
 	private Logger logger;
 
     private int laufzeit;
