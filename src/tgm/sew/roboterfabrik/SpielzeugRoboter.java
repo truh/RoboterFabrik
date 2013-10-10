@@ -1,9 +1,9 @@
 package tgm.sew.roboterfabrik;
 
+import tgm.sew.roboterfabrik.logging.LoggerFactory;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import tgm.sew.roboterfabrik.logging.LoggerFactory;
 
 public class SpielzeugRoboter implements Stringifyable {
 	private static String TID_PREFIX= "Threadee-ID";

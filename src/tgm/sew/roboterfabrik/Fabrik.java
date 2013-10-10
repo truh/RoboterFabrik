@@ -1,8 +1,8 @@
 package tgm.sew.roboterfabrik;
 
-import java.util.logging.Logger;
-
 import tgm.sew.roboterfabrik.logging.LoggerFactory;
+
+import java.util.logging.Logger;
 
 public class Fabrik {
 
@@ -12,8 +12,6 @@ public class Fabrik {
     private Kunde [] kundes;
 
 	private Sekretariat sekretariat;
-
-	private Lager lager;
 
 	private Logger logger;
 

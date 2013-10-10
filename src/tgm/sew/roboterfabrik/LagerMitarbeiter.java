@@ -3,7 +3,6 @@ package tgm.sew.roboterfabrik;
 import tgm.sew.roboterfabrik.logging.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,7 +46,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
      * @param type Typ des Artikels
      * @return Artikel oder null
      */
-    public synchronized Stringifyable anfrage(Class<? extends Stringifyable> type) {
+    public Stringifyable anfrage(Class<? extends Stringifyable> type) {
         logger.entering("LagerMitarbeiter", "anfrage", type);
         Stringifyable item = null;
 

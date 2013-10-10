@@ -1,10 +1,10 @@
 package tgm.sew.roboterfabrik;
 
-import java.util.Random;
-import java.util.logging.Logger;
-
 import tgm.sew.roboterfabrik.logging.LoggerFactory;
+
+import java.util.Random;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Kunden geben Bestellungen an den LagerMitarbeiter ab.

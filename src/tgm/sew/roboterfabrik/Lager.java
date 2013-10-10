@@ -17,6 +17,23 @@ public class Lager
     private Queue<Antenne> antennen;
 	private Queue<SpielzeugRoboter> threadees;
 
+    //Zum cachen der Anzahl der jeweiligen Bauteile um die Performance zu erhoehen
+    private int cAntennen;
+    private int cArme;
+    private int cAugen;
+    private int cGreifer;
+    private int cKettenAntrieb;
+    private int cRuempfe;
+    private int cThreadees;
+
+    private final Object antenneLock;
+    private final Object armLock;
+    private final Object augeLock;
+    private final Object greiferLock;
+    private final Object kettenAntriebLock;
+    private final Object rumpfLock;
+    private final Object threadeeLock;
+
     private Logger logger;
 
     /**
@@ -33,6 +50,24 @@ public class Lager
         this.greifer = new FileQueue<Greifer>(filePfad + File.separator, Greifer.class);
         this.antennen = new FileQueue<Antenne>(filePfad + File.separator, Antenne.class);
         this.threadees = new FileQueue<SpielzeugRoboter>(filePfad + File.separator, SpielzeugRoboter.class);
+
+        //Anzahl an Bauteilen auf die aktuelle Anzahl setzen.
+        this.cAntennen = this.antennen.size();
+        this.cArme = this.arme.size();
+        this.cAugen = this.augen.size();
+        this.cGreifer = this.greifer.size();
+        this.cKettenAntrieb = this.kettenAntriebe.size();
+        this.cRuempfe = this.ruempfe.size();
+        this.cThreadees = this.threadees.size();
+
+        //Lockingobjekte erstellen
+        this.antenneLock = new Object();
+        this.armLock = new Object();
+        this.augeLock = new Object();
+        this.greiferLock = new Object();
+        this.kettenAntriebLock = new Object();
+        this.rumpfLock = new Object();
+        this.threadeeLock = new Object();
     }
 
     /**
@@ -42,7 +77,14 @@ public class Lager
      * @return true wenn hinzufügen möglich war
      */
 	public boolean addAuge(Auge auge) {
-		return this.augen.offer(auge);
+        synchronized (augeLock)
+        {
+            if(this.augen.offer(auge)) {
+                ++this.cAugen;
+                return false;
+            }
+            return false;
+        }
 	}
 
     /**
@@ -52,8 +94,15 @@ public class Lager
      * @return true wenn hinzufügen möglich war
      */
 	public boolean addRumpf(Rumpf rumpf) {
-		return this.ruempfe.offer(rumpf);
-	}
+        synchronized (rumpfLock)
+        {
+            if(this.ruempfe.offer(rumpf)) {
+                ++this.cRuempfe;
+                return true;
+            }
+            return false;
+        }
+    }
 
     /**
      * Einen Arm zum Lager hinzufügen
@@ -62,8 +111,15 @@ public class Lager
      * @return true wenn hinzufügen möglich war
      */
 	public boolean addArm(Arm arm) {
-		return this.arme.offer(arm);
-	}
+        synchronized (armLock)
+        {
+            if(this.arme.offer(arm)) {
+                ++this.cArme;
+                return true;
+            }
+            return false;
+        }
+    }
 
     /**
      * Einen Greifer zum Lager hinzufügen
@@ -72,7 +128,14 @@ public class Lager
      * @return true wenn hinzufügen möglich war
      */
     public boolean addKettenantrieb(Kettenantrieb kettenAntrieb) {
-        return this.kettenAntriebe.offer(kettenAntrieb);
+        synchronized (kettenAntriebLock)
+        {
+            if(this.kettenAntriebe.offer(kettenAntrieb)) {
+                ++this.cKettenAntrieb;
+                return true;
+            }
+            return false;
+        }
     }
 
     /**
@@ -82,7 +145,14 @@ public class Lager
      * @return true wenn hinzufügen möglich war
      */
     public boolean addGreifer(Greifer greifer) {
-        return this.greifer.offer(greifer);
+        synchronized (greiferLock)
+        {
+            if(this.greifer.offer(greifer)) {
+                ++this.cGreifer;
+                return true;
+            }
+            return false;
+        }
     }
 
     /**
@@ -92,7 +162,14 @@ public class Lager
      * @return true wenn hinzufügen möglich war
      */
     public boolean addAntenne(Antenne antenne) {
-        return this.antennen.offer(antenne);
+        synchronized (antenneLock)
+        {
+            if(this.antennen.offer(antenne)) {
+                ++this.cAntennen;
+                return true;
+            }
+            return false;
+        }
     }
 
     /**
@@ -102,7 +179,14 @@ public class Lager
      * @return true wenn hinzufügen möglich war
      */
     public boolean addThreadee(SpielzeugRoboter threadee) {
-        return this.threadees.offer(threadee);
+        synchronized (threadeeLock)
+        {
+            if(this.threadees.offer(threadee)) {
+                ++this.cThreadees;
+                return true;
+            }
+            return false;
+        }
     }
 
     /**
@@ -111,8 +195,16 @@ public class Lager
      * @return Entnommenes Auge oder null wenn keines vorhanden war
      */
 	public Auge pollAuge() {
-		return this.augen.poll();
-	}
+        synchronized (augeLock)
+        {
+            if(this.cAugen == 0)
+                return null;
+            Auge auge = this.augen.poll();
+            if(auge != null)
+                --this.cAugen;
+            return auge;
+        }
+    }
 
     /**
      * Einen Rumpf dem Lager entnehmen
@@ -120,8 +212,16 @@ public class Lager
      * @return Entnommener Rumpf oder null wenn keiner vorhanden war
      */
 	public Rumpf pollRumpf() {
-		return this.ruempfe.poll();
-	}
+        synchronized (rumpfLock)
+        {
+            if(this.cRuempfe == 0)
+                return null;
+            Rumpf rumpf = this.ruempfe.poll();
+            if(rumpf != null)
+                --this.cRuempfe;
+            return rumpf;
+        }
+    }
 
     /**
      * Einen Arm dem Lager entnehmen
@@ -129,8 +229,16 @@ public class Lager
      * @return Entnommener Arm oder null wenn keiner vorhanden war
      */
 	public Arm pollArm() {
-		return this.arme.poll();
-	}
+        synchronized (armLock)
+        {
+            if(this.cArme == 0)
+                return null;
+            Arm arm = this.arme.poll();
+            if(arm != null)
+                --this.cArme;
+            return arm;
+        }
+    }
 
     /**
      * Einen Kettenantrieb dem Lager entnehmen
@@ -138,7 +246,15 @@ public class Lager
      * @return Entnommener KettenAntrieb oder null wenn keiner vorhanden war
      */
     public Kettenantrieb pollKettenantrieb() {
-        return this.kettenAntriebe.poll();
+        synchronized (kettenAntriebLock)
+        {
+            if(this.cKettenAntrieb == 0)
+                return null;
+            Kettenantrieb kettenantrieb = this.kettenAntriebe.poll();
+            if(kettenantrieb != null)
+                --this.cKettenAntrieb;
+            return kettenantrieb;
+        }
     }
 
     /**
@@ -147,7 +263,15 @@ public class Lager
      * @return Entnommener Greifer oder null wenn keiner vorhanden war
      */
     public Greifer pollGreifer() {
-        return this.greifer.poll();
+        synchronized (greiferLock)
+        {
+            if(this.cGreifer == 0)
+                return null;
+            Greifer greifer = this.greifer.poll();
+            if(greifer != null)
+                --this.cGreifer;
+            return greifer;
+        }
     }
     /**
      * Einen Antenne dem Lager entnehmen
@@ -155,7 +279,15 @@ public class Lager
      * @return Entnommener Antenne oder null wenn keiner vorhanden war
      */
     public Antenne pollAntenne() {
-        return this.antennen.poll();
+        synchronized (antenneLock)
+        {
+            if(this.cAntennen == 0)
+                return null;
+            Antenne antenne = this.antennen.poll();
+            if(antenne != null)
+                --this.cAntennen;
+            return antenne;
+        }
     }
 
     /**
@@ -164,6 +296,14 @@ public class Lager
      * @return Entnommenes Threadee oder null wenn keiner vorhanden war
      */
     public SpielzeugRoboter pollThreadee() {
-        return this.threadees.poll();
+        synchronized (threadeeLock)
+        {
+            if(this.cThreadees == 0)
+                return null;
+            SpielzeugRoboter spielzeugRoboter = this.threadees.poll();
+            if(spielzeugRoboter != null)
+                --this.cThreadees;
+            return spielzeugRoboter;
+        }
     }
 }
