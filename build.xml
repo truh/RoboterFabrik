@@ -81,15 +81,13 @@
         </copy>
         <copy file="build.xml" todir="${jar.temp}" />
         <copy file="zeitaufzeichnung_jklepp.rst" todir="${jar.temp}" />
+        <copy file="zeitaufzeichnung_avogt.rst" todir="${jar.temp}" />
+        <copy file="Gruppenprotokoll.pdf" todir="${jar.temp}" />
         <jar destfile="${build.dir}/${jar.name}">
             <fileset dir="${jar.temp}"/>
             <manifest>
                 <attribute name="Main-Class" value="${main.class}"/>
             </manifest>
         </jar>
-    </target>
-
-    <target name="run" depends="jar" description="Executes the Jar file">
-        <java jar="build/RoboterFabrik_Vogt_Klepp.jar" args="" />
     </target>
 </project>

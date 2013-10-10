@@ -44,12 +44,6 @@ public class Simulation {
             log.throwing("Simulation", "main", e);
             log.warning("Fehlerhafte Kommandozeilen Argumente");
         }
-        log.info("RoboterFabrik gestartet mit Argumenten");
-        log.info("lager:\t" + cmd.getOptionValue("lager"));
-        log.info("logs:\t" + cmd.getOptionValue("logs"));
-        log.info("lieferanten:\t" + cmd.getOptionValue("lieferanten"));
-        log.info("monteure:\t" + cmd.getOptionValue("monteure"));
-        log.info("laufzeit:\t" + cmd.getOptionValue("laufzeit"));
 
         //Dateipfade aus args auslesen und ueberpruefen
         String lagerPfad = cmd.getOptionValue("lager");
