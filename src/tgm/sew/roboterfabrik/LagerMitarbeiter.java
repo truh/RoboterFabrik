@@ -7,6 +7,11 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Der LagerMitarbeiter sorgt dafuer das Teile und Threadees an der
+ * richtigen Stelle abgelegt werden. Ausserdem versucht er sein
+ * bestes um Bestellungen auszufuehren.
+ */
 public class LagerMitarbeiter implements Mitarbeiter {
 
 	private Lager lager;
@@ -18,6 +23,7 @@ public class LagerMitarbeiter implements Mitarbeiter {
     private boolean stop;
 
     private Logger logger;
+
     /**
      * Erstellt einen LagerMitarbeiter welche an gegebenen filePfad ein Lager eröffnet
      *
@@ -160,13 +166,17 @@ public class LagerMitarbeiter implements Mitarbeiter {
 
     /**
      * Für was aucher immer der LagerMitarbeiter die id brauchen soll
-     * @return eindeutige ID
+     * @return einmalige ID
      */
     @Override
     public int getId() {
         return this.id;
     }
 
+    /**
+     * Nicht benötigt, nicht implementiert
+     * @return null
+     */
     @Override
     public Sekretariat getSekretariat() {
         return null;

@@ -1,11 +1,8 @@
-/**
- * 
- */
 package tgm.sew.roboterfabrik;
 
 /**
- * @author Andi6444
- *
+ * AbstractTeil dient dazu eine redundante Implementierung fuer jeden Teil-Typ unnoetig
+ * zu machen.
  */
 public abstract class AbstractTeil implements Teil {
 	private String name;
@@ -48,7 +45,8 @@ public abstract class AbstractTeil implements Teil {
         
     }
     /**
-     * Um den MontageMitarbeiter Arbeit zu verschaffen
+     * Gibt das Zahlenarray zurueck
+     * Das Zahlenarray dient dazu dem  MontageMitarbeiter Arbeit zu verschaffen
      */
     @Override
     public int[] getZahlen()
@@ -57,7 +55,10 @@ public abstract class AbstractTeil implements Teil {
     }
 
     /**
-     * 
+     * Setzt das Zahlenarray,
+     * Aufruf z.B. durch den MontageMitarbeiter nachdem die Zahlen sortiert wurden
+     *
+     * @param zahlen Zahlenarray
      */
 	@Override
 	public void setZahlen(int[] zahlen) {

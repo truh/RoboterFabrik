@@ -9,6 +9,9 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
+/**
+ * Die LoggerFactory dient dazu auf einfachste Art angepasste Logger erzeugen zu koennen.
+ */
 public class LoggerFactory
 {
     private ConsoleHandler consoleHandler;

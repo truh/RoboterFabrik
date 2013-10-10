@@ -3,6 +3,9 @@ package tgm.sew.roboterfabrik.logging;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
+/**
+ * Der RoboFormater passt Log Nachrichten an den Bedarf des Programmes an.
+ */
 public class RoboFormater
     extends Formatter
 {

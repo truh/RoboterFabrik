@@ -10,8 +10,13 @@ import java.util.Queue;
 import java.util.logging.Logger;
 
 /**
- * @author jakob
- * @version 2013-10-08
+ * Bei der FileQueue handelt es sich um eine FIFO Queue welche
+ * ihre Daten direkt in einer Datei speichert.
+ *
+ * Elemente der FileQueue muessen das Interface Stringifyable implementieren
+ * damit sie sich auf einfache Art in Strings und wieder zurueck verwandeln lassen.
+ * Ausserdem muesse die entsprechenden Klassen ueber einen Defaultkonstruktor
+ * ohne Parameter verfuegen, sonst gibt es eine Endlosschleife.
  */
 public class FileQueue<E extends Stringifyable> extends AbstractQueue<E>
 {

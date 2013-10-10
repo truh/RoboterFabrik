@@ -5,46 +5,48 @@ import tgm.sew.roboterfabrik.logging.LoggerFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * SpielzeugRoboter sind das Produkt der Fabrik
+ * sie werden vom MontageMitarbeiter zusammengebaut
+ */
 public class SpielzeugRoboter implements Stringifyable {
 	private static String TID_PREFIX= "Threadee-ID";
 
 	private int id;
-
 	private int mitarbeiterId;
 
+    //Bauteile
+    private Antenne antenne;
+    private Arm arm1;
+    private Arm arm2;
 	private Auge auge1;
-
 	private Auge auge2;
-
-	private Rumpf rumpf;
-
-	private Kettenantrieb kettenantrieb;
-
-	private Arm arm1;
-
-	private Arm arm2;
-
-	private Greifer greifer1;
-	
-	private Greifer greifer2;
-	
-	private Antenne antenne;
+    private Greifer greifer1;
+    private Greifer greifer2;
+    private Kettenantrieb kettenantrieb;
+    private Rumpf rumpf;
 
 	private Sekretariat sekretariat;
 
 	private Logger logger;
 
+    /**
+     * Defaultkonstuktor
+     */
     public SpielzeugRoboter() {
+        //Logger erzeugen
         this.logger = new LoggerFactory().getLogger(SpielzeugRoboter.class);
-        this.auge1 = new Auge();
-        this.auge2 = new Auge();
-        this.rumpf = new Rumpf();
-        this.kettenantrieb = new Kettenantrieb();
+
+        //Bauteile
+        this.antenne = new Antenne();
         this.arm1 = new Arm();
         this.arm2 = new Arm();
+        this.auge1 = new Auge();
+        this.auge2 = new Auge();
         this.greifer1 = new Greifer();
         this.greifer2 = new Greifer();
-        this.antenne = new Antenne();
+        this.kettenantrieb = new Kettenantrieb();
+        this.rumpf = new Rumpf();
     }
 
     /**
@@ -63,18 +65,24 @@ public class SpielzeugRoboter implements Stringifyable {
      * @param antenne Bauteil Antenne
      */
 	public SpielzeugRoboter(int id, int mitarbeiterId, Auge auge1, Auge auge2, Rumpf rumpf, Kettenantrieb kettenantrieb, Arm arm1, Arm arm2,Greifer greifer1,Greifer greifer2,Antenne antenne) {
-		this();
+		//Defaultkonstuktor
+        this();
+
+        //Id's
 		this.id = id;
 		this.mitarbeiterId = mitarbeiterId;
+
+        //Bauteile
+        this.antenne = antenne;
+        this.arm1 = arm1;
+        this.arm2 = arm2;
 		this.auge1 = auge1;
 		this.auge2 = auge2;
+        this.greifer1 = greifer1;
+        this.greifer2 = greifer2;
+        this.kettenantrieb = kettenantrieb;
 		this.rumpf = rumpf;
-		this.kettenantrieb = kettenantrieb;
-		this.arm1 = arm1;
-		this.arm2 = arm2;
-		this.greifer1 = greifer1;
-		this.greifer2 = greifer2;
-		this.antenne = antenne;
+
 		logger.log(Level.INFO,"Threadee wurde erstellt");
 	}
 

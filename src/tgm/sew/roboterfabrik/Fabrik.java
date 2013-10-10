@@ -4,6 +4,10 @@ import tgm.sew.roboterfabrik.logging.LoggerFactory;
 
 import java.util.logging.Logger;
 
+/**
+ * In der Fabrik werden die alle aktiven Objekte wie
+ * Mitarbeiter erstellt und verwaltet.
+ */
 public class Fabrik {
 
     private LagerMitarbeiter [] lagerMitarbeiters;
@@ -18,7 +22,8 @@ public class Fabrik {
     private int laufzeit;
 	
 	/**
-	 * Hier werden die ThreadPools verwaltet
+	 * Hier werden alle Mitarbeiter, Kunden, ect erstellt
+     *
 	 * @param laufzeit	Wie lang (in ms) die Threads laufen
 	 * @param numLieferanten Wie viele Lieferanten Threads laufe
 	 * @param numMonteure Wie viele MontageMitarbeiter Threads max laufen

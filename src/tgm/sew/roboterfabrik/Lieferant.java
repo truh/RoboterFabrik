@@ -5,6 +5,9 @@ import tgm.sew.roboterfabrik.logging.LoggerFactory;
 import java.util.Random;
 import java.util.logging.Logger;
 
+/**
+ * Der Lieferant liefert Teile an den LagerMitarbeiter
+ */
 public class Lieferant implements Stoppable {
 
 	private LagerMitarbeiter lagerMitarbeiter;
@@ -12,6 +15,11 @@ public class Lieferant implements Stoppable {
     private boolean stop;
     private Logger logger;
 
+    /**
+     * Konstruktor bei dem der LagerMitarbeiter angegeben werden kann an den geliefert werden soll
+     *
+     * @param lagerMitarbeiter an diesen LagerMitarbeiter wird geliefert
+     */
 	public Lieferant(LagerMitarbeiter lagerMitarbeiter) {
         this.lagerMitarbeiter = lagerMitarbeiter;
         this.stop = false;
