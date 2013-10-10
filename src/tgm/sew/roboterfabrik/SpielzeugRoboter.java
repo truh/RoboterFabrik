@@ -34,8 +34,36 @@ public class SpielzeugRoboter implements Stringifyable {
 
 	private Logger logger;
 
+    public SpielzeugRoboter() {
+        this.logger = new LoggerFactory().getLogger(SpielzeugRoboter.class);
+        this.auge1 = new Auge();
+        this.auge2 = new Auge();
+        this.rumpf = new Rumpf();
+        this.kettenantrieb = new Kettenantrieb();
+        this.arm1 = new Arm();
+        this.arm2 = new Arm();
+        this.greifer1 = new Greifer();
+        this.greifer2 = new Greifer();
+        this.antenne = new Antenne();
+    }
+
+    /**
+     * Konstruktor für die Verwendung durch den MontageMitarbeiter
+     *
+     * @param id Id des Threadees
+     * @param mitarbeiterId Id des MontageMitarbeiters der den Roboter montiert hat
+     * @param auge1 Bauteil Auge
+     * @param auge2 Bauteil Auge
+     * @param rumpf Bauteil Rumpf
+     * @param kettenantrieb Bauteil Kettenantrieb
+     * @param arm1 Bauteil Arm
+     * @param arm2 Bauteil Arm
+     * @param greifer1 Bauteil Greifer
+     * @param greifer2 Bauteil Greifer
+     * @param antenne Bauteil Antenne
+     */
 	public SpielzeugRoboter(int id, int mitarbeiterId, Auge auge1, Auge auge2, Rumpf rumpf, Kettenantrieb kettenantrieb, Arm arm1, Arm arm2,Greifer greifer1,Greifer greifer2,Antenne antenne) {
-		this.logger = new LoggerFactory().getLogger(SpielzeugRoboter.class);
+		this();
 		this.id = id;
 		this.mitarbeiterId = mitarbeiterId;
 		this.auge1 = auge1;
@@ -56,16 +84,16 @@ public class SpielzeugRoboter implements Stringifyable {
 	 */
 	public String toCSV() {
 		StringBuilder s = new StringBuilder();
-		s.append("Threadee-ID"+id+",");
-		s.append("Mitarbeiter-ID"+mitarbeiterId+",");
-    	s.append(auge1.toCSV()+",");
-    	s.append(auge2.toCSV()+",");
-    	s.append(rumpf.toCSV()+",");
-    	s.append(kettenantrieb.toCSV()+",");
-    	s.append(arm1.toCSV()+",");
-    	s.append(arm2.toCSV()+",");
-    	s.append(greifer1.toCSV()+",");
-    	s.append(greifer2.toCSV()+",");
+		s.append("Threadee-ID").append(id).append(",");
+		s.append("Mitarbeiter-ID").append(mitarbeiterId).append(",");
+    	s.append(auge1.toCSV()).append(",");
+    	s.append(auge2.toCSV()).append(",");
+    	s.append(rumpf.toCSV()).append(",");
+    	s.append(kettenantrieb.toCSV()).append(",");
+    	s.append(arm1.toCSV()).append(",");
+    	s.append(arm2.toCSV()).append(",");
+    	s.append(greifer1.toCSV()).append(",");
+    	s.append(greifer2.toCSV()).append(",");
     	s.append(antenne.toCSV());
     	
         return s.toString();
