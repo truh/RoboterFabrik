@@ -72,7 +72,7 @@ public class FileQueue<E extends Stringifyable> extends AbstractQueue<E>
             E element = null;
             boolean success = false;
 
-            while(!success){ //Diese Schleife produziert, fuer SpielzeugRoboter (fuer Teile nicht) eine endlosschleife
+            while(!success){
                 success = true;
 
                 try {
