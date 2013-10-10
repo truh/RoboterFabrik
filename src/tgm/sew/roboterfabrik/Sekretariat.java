@@ -5,9 +5,9 @@ package tgm.sew.roboterfabrik;
  */
 public class Sekretariat {
 	
-	private int id=100;
+	private int id=0;
 	
-	private int mitarbeiterId=100;
+	private int mitarbeiterId=0;
 	
 	public Sekretariat(){
 		
